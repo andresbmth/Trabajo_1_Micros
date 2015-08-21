@@ -4,6 +4,6 @@
 
 int main()
 {
-    long int valores[12];
+    unsigned long int valores[12];
     mostrar_valores(valores);
 }

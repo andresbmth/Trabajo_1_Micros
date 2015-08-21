@@ -23,7 +23,7 @@ void AND(unsignet long int *R0,long int R1,long int R2);
 void EOR(unsignet long int *R0,long int R1,long int R2);
 
 /**
-* \brief Funcion mov
+* \brief Funcion MOV
 * \param *R0 puntero del registro de destino
 * \param R1 valor de registro orgien
 */

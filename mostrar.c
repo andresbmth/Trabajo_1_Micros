@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "mostrar.h"
 
-void mostrar_valores(long int valores[]){
+void mostrar_valores(unsigned long int valores[]){
     int i;
     printf("\n");
     for(i=0;i<12;i++){
