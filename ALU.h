@@ -24,9 +24,8 @@ void EOR(unsignet long int *R0,long int R1,long int R2);
 
 /**
 * \brief Funcion mov
-* \param *R0 puntero del primer registro
-* \param R1 valor del segundo registro
-* \return Resultado de la suma
+* \param *R0 puntero del registro de destino
+* \param R1 valor de registro orgien
 */
 void MOV(unsignet long int *R0,long int R1);
 
@@ -35,7 +34,6 @@ void MOV(unsignet long int *R0,long int R1);
 * \param *R0 puntero del primer registro
 * \param R1 valor del segundo registro
 * \param R2 valor del tercer registro
-* \return Resultado de la suma
 */
 void ORR(unsignet long int *R0,long int R1,long int R2);
 
@@ -44,6 +42,5 @@ void ORR(unsignet long int *R0,long int R1,long int R2);
 * \param *R0 puntero del primer registro
 * \param R1 valor del segundo registro
 * \param R2 valor del tercer registro
-* \return Resultado de la suma
 */
 void SUB(unsignet long int *R0,long int R1,long int R2);
