@@ -1,46 +1,46 @@
 /**
 * \brief Funcion ADD
-* \param *R0 puntero del primer registro
-* \param R1 valor del segundo registro
-* \param R2 valor del tercer registro
+* \param *Rd puntero del primer registro
+* \param Rn valor del segundo registro
+* \param Rm valor del tercer registro
 */
-void ADD(unsignet long int *R0,long int R1,long int R2);
+void ADD(unsignet long int *Rd,long int Rn,long int Rm);
 
 /**
 * \brief Funcion AND
-* \param *R0 puntero del primer registro
-* \param R1 valor del segundo registro
-* \param R2 valor del tercer registro
+* \param *Rd puntero del primer registro
+* \param Rn valor del segundo registro
+* \param Rm valor del tercer registro
 */
-void AND(unsignet long int *R0,long int R1,long int R2);
+void AND(unsignet long int *Rd,long int Rn,long int Rm);
 
 /**
 * \brief Funcion EOR
-* \param *R0 puntero del primer registro
-* \param R1 valor del segundo registro
-* \param R2 valor del tercer registro
+* \param *Rd puntero del primer registro
+* \param Rn valor del segundo registro
+* \param Rm valor del tercer registro
 */
-void EOR(unsignet long int *R0,long int R1,long int R2);
+void EOR(unsignet long int *Rd,long int Rn,long int Rm);
 
 /**
 * \brief Funcion MOV
-* \param *R0 puntero del registro de destino
-* \param R1 valor de registro orgien
+* \param *Rd puntero del registro de destino
+* \param Rn valor de registro orgien
 */
-void MOV(unsignet long int *R0,long int R1);
+void MOV(unsignet long int *Rd,long int Rn);
 
 /**
 * \brief Funcion ORR
-* \param *R0 puntero del primer registro
-* \param R1 valor del segundo registro
-* \param R2 valor del tercer registro
+* \param *Rd puntero del primer registro
+* \param Rn valor del segundo registro
+* \param Rm valor del tercer registro
 */
-void ORR(unsignet long int *R0,long int R1,long int R2);
+void ORR(unsignet long int *Rd,long int Rn,long int Rm);
 
 /**
 * \brief Funcion SUB
-* \param *R0 puntero del primer registro
-* \param R1 valor del segundo registro
-* \param R2 valor del tercer registro
+* \param *Rd puntero del primer registro
+* \param Rn valor del segundo registro
+* \param Rm valor del tercer registro
 */
-void SUB(unsignet long int *R0,long int R1,long int R2);
+void SUB(unsignet long int *Rd,long int Rn,long int Rm);
