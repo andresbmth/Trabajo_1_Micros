@@ -4,7 +4,7 @@
 * \param Rn valor del segundo registro
 * \param Rm valor del tercer registro
 */
-void ADD(unsignet long int *Rd,long int Rn,long int Rm);
+void ADD(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
 * \brief Funcion AND
@@ -12,7 +12,7 @@ void ADD(unsignet long int *Rd,long int Rn,long int Rm);
 * \param Rn valor del segundo registro
 * \param Rm valor del tercer registro
 */
-void AND(unsignet long int *Rd,long int Rn,long int Rm);
+void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
 * \brief Funcion EOR
@@ -20,14 +20,14 @@ void AND(unsignet long int *Rd,long int Rn,long int Rm);
 * \param Rn valor del segundo registro
 * \param Rm valor del tercer registro
 */
-void EOR(unsignet long int *Rd,long int Rn,long int Rm);
+void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
 * \brief Funcion MOV
 * \param *Rd puntero del registro de destino
 * \param Rn valor de registro orgien
 */
-void MOV(unsignet long int *Rd,long int Rn);
+void MOV(uint32_t *Rd,uint32_t Rn);
 
 /**
 * \brief Funcion ORR
@@ -35,7 +35,7 @@ void MOV(unsignet long int *Rd,long int Rn);
 * \param Rn valor del segundo registro
 * \param Rm valor del tercer registro
 */
-void ORR(unsignet long int *Rd,long int Rn,long int Rm);
+void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
 * \brief Funcion SUB
@@ -43,4 +43,4 @@ void ORR(unsignet long int *Rd,long int Rn,long int Rm);
 * \param Rn valor del segundo registro
 * \param Rm valor del tercer registro
 */
-void SUB(unsignet long int *Rd,long int Rn,long int Rm);
+void SUB(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
