@@ -3,4 +3,4 @@
 * \param registros imprime los valores de los registros 
 */
 
-void mostrar_valores(unsigned long int registros[]);
+void mostrar_valores(uint32_t registros[]);
