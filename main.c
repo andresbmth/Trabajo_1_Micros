@@ -5,6 +5,6 @@
 
 int main()
 {
-    unsigned long int valores[12];
-    mostrar_valores(valores);
+    uint32_t registro[12]; 
+    mostrar_valores(valores);  
 }
