@@ -1,10 +1,13 @@
+#include <stdint.h>
+
 /**
-* \brief Funcion MOV
-* \param *Rd puntero del registro de destino
-* \param Rn valor de registro orgien
-* \param *R_Banderas registro de las banderas
+* \brief Funcion para las banderas
+* \param Rd valor resultante de la operacion realizada anteriormente
+* \param Rn primer valor de la operacion realizara anteriormente
+* \param Rm segundo valor de la operacion realizada anteriormente
+* \param *R_Banderas registro donde se almacenan las banderas
 */ 
-void Banderas(uint32_t *Rd, uint32_t Rn, uint32_t Rm, uint32_t,char R_Banderas);
+void Banderas(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 
 
 /**
@@ -34,16 +37,13 @@ void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 */
 void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 
-
-
-
 /**
 * \brief Funcion MOV
 * \param *Rd puntero del registro de destino
 * \param Rn valor de registro orgien
 * \param *R_Banderas registro de las banderas
 */
-void MOV(uint32_t *Rd,uint32_t Rn,char *R_Banderas);
+void MOV(uint32_t *Rd,uint32_t Rn);
 
 /**
 * \brief Funcion ORR
