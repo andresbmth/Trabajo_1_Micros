@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 /**
 * \brief funcion para mostrar los datos del registro
 * \param registros imprime los valores de los registros 
