@@ -1,10 +1,12 @@
+#include <stdint.h>
+
 /**
 * \brief Funcion LSL Desplazamiento logico a la izquierda
 * \param Rd Primer registro
 * \param Rn Segundoegundo registro
 * \param Rm Tercer registro o valor inmediato
 */ 
-void LSL(uint32_t *Rd, uint32_t Rm,uint32_t Rm);
+void LSL(uint32_t *Rd, uint32_t Rn,uint32_t Rm);
 
 /**
 * \brief Funcion LSR Desplazamiento logico a la derecha
