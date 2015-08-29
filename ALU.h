@@ -62,3 +62,36 @@ void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 * \param *R_Banderas registro de las banderas
 */
 void SUB(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
+
+/**
+* \brief Funcion CMN
+* \param Rn valor del primer registro
+* \param Rm valor del segundo registro
+* \param *R_Banderas registro de las banderas
+*/
+void CMN(uint32_t Rn, uint32_t Rm,char *R_Banderas);
+
+/**
+* \brief Funcion CMN
+* \param Rn valor del primer registro
+* \param Rm valor del segundo registro
+* \param *R_Banderas registro de las banderas
+*/
+void CMP(uint32_t Rn, uint32_t Rm,char *R_Banderas);
+
+/**
+* \brief Funcion MUL
+* \param *Rd puntero del primer registro
+* \param Rn valor del segundo registro
+* \param Rm valor del tercer registro
+* \param *R_Banderas registro de las banderas
+*/
+void MUL(uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas);
+
+/**
+* \brief Funcion TST
+* \param Rn valor del primer registro
+* \param Rm valor del segundo registro
+* \param *R_Banderas registro de las banderas
+*/
+void TST(uint32_t Rn, uint32_t Rm,char *R_Banderas);

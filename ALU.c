@@ -58,4 +58,21 @@ void SUB(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	Banderas(*Rd,Rn,Rm,R_Banderas);
 }
 
+void CMN(uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	Banderas(Rn+Rm,Rn,Rm,R_Banderas);     //ADN sin almacenar, solo modifica banderas
+}
+
+void CMP(uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	Banderas(Rn-Rm,Rn,Rm,R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
+}
+
+void MUL(uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	*Rd=Rn*Rm;            //Multiplicacion de registros, solo se alacenan 32 bits menos significativos
+	Banderas(*Rd,Rn,Rm,R_Banderas);
+}
+
+void TST(uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	Banderas(Rn&Rm,Rn,Rm,R_Banderas);  //AND sin almacenacmiento, solo modifica banderas
+}
+
 
