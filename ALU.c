@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "ALU.h"
 
-#defeine N 0
-#defeine Z 1
-#defeine C 2
-#defeine V 3
+#define N 0
+#define Z 1
+#define C 2
+#define V 3
 
 void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	 uint32_t d,n,m;     //variables auxiliares para revisar el bit 31 del registro
@@ -21,7 +21,7 @@ void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 		 R_Banderas[Z]=1;  // R_Banderas[1] hace referencia a la bandera Z (resultado nulo)
 	 }else{
 		 R_Banderas[Z]=0;
-	 } 
+	 }
 	 if((n==m)&&(n==(1<<31))){
 		 R_Banderas[C]=1;  // R_Banderas[2] hace referencia a la bandera C (acarreo en el resultado)
 	 }
