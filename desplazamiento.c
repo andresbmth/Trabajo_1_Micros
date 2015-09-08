@@ -33,12 +33,12 @@ void MUN(uint32_t *Rd, uint32_t Rm){
 	*Rd=~Rm;	
 }
 
-void RSB(uint32_t *Rd, uint32_t Rn, int t){
-	t=0;
-	*Rd=t-Rn;	
+void RSB(uint32_t *Rd, uint32_t Rn, int inmediato){
+	inmediato=0;
+	*Rd=inmediato-Rn;	
 }
 
- void NOP(uint32_t *Rd, uint32_t Rn, int t){
+ void NOP(void){
  }
  
  void REV(uint32_t *Rd, uint32_t Rn){

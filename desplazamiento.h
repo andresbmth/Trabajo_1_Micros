@@ -53,15 +53,14 @@ void MUN(uint32_t *Rd, uint32_t Rm);
 * \param Rn segundo registro o valor inmediato
 * \param t para dar la condicion y negar el registro
 */ 
-void RSB(uint32_t *Rd, uint32_t Rn, int t);
+void RSB(uint32_t *Rd, uint32_t Rn, int inmediato);
 
 
 /**
 * \brief <center><b>Funcion NOP No hace nada en un tiempo o flanco de relojo</b></center>  
-* \param Rd Primer registro
-* \param Rn Segudo registro o valor inmediato
+* \param La funcion no tiene parametros de entrada
 */
-void NOP(uint32_t *Rd, uint32_t Rn, int t);
+void NOP(void);
 
 
 /**
