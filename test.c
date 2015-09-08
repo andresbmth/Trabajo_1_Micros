@@ -4,6 +4,11 @@
 #include "mostrar.h"
 #include "ALU.h"
 
+#defeine N 0
+#defeine Z 1
+#defeine C 2
+#defeine V 3
+
 int main()
 {
 	int op;
@@ -51,10 +56,10 @@ int main()
 				ADD(&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 3:				
@@ -66,10 +71,10 @@ int main()
 				AND(&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 4:
@@ -81,10 +86,10 @@ int main()
 				EOR(&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 5:
@@ -103,10 +108,10 @@ int main()
 				CMN(registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 8:
@@ -118,10 +123,10 @@ int main()
 				CMP(registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 9:			
@@ -133,10 +138,10 @@ int main()
 				MUL(&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 10:			
@@ -148,10 +153,10 @@ int main()
 				TST(registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-				printf("%d valor del resultado bandera n \n",banderas[0]);
-				printf("%d valor del resultado bandera z \n",banderas[1]);
-				printf("%d valor del resultado bandera c \n",banderas[2]);
-				printf("%d valor del resultado bandera v \n",banderas[3]);
+				printf("%d valor del resultado bandera n \n",banderas[N]);
+				printf("%d valor del resultado bandera z \n",banderas[Z]);
+				printf("%d valor del resultado bandera c \n",banderas[C]);
+				printf("%d valor del resultado bandera v \n",banderas[V]);
 			break;
 			
 			case 11:			

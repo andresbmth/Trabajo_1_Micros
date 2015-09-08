@@ -3,7 +3,7 @@ CFLAGS = -O3 -c -Wall
 
 all:	obj 
 	rm -f test.o
-	$(cc) -o main.exe *.o
+	$(cc) -o main.exe *.o -lpdcurses
 	rm -f *.o	
 
 test:	obj

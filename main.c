@@ -6,9 +6,11 @@
 #include "curses.h"
 #include "desplazamiento.h"
 
-int main(void)
+
+
+int main()
 {
-	uint32_t registro[12];
+	uint32_t registro[12]={2,4,5,0,0,0,0,0,0,0,0,0};
 	char R_bandera[4];
 	initscr();		/* Inicia modo curses */
 	curs_set(0);	/* Cursor Invisible */
@@ -18,26 +20,21 @@ int main(void)
     start_color();	/* Permite manejar colores */
 	init_pair(1, COLOR_MAGENTA, COLOR_BLACK);	/* Pair 1 -> Texto verde fondo Negro */
     init_pair(2,COLOR_YELLOW,COLOR_BLACK);
-	
-	
-	
-	registro[0]=11;
-    registro[1]=13245345;
-	registro[2]=2345986;
+
+
+
+
+    mostrar_valores(registro);
     attron(COLOR_PAIR(1));  /* Activa el color morado para el texto y negro para el fondo Pair 1*/
-	
+
     ADD(&registro[0],registro[1],registro[2],R_bandera);
 	move(6,17);
-    attron(COLOR_PAIR(1));
-    printw("Resultados obtenidos de las operaciones ADD=\n",registro[0]);
+    attron(COLOR_PAIR(2));
+    printw("Resultados obtenidos de las operaciones ADD=\n %d",registro[0]);
     refresh();
     getch();
     endwin();
 
-
-	
-	
-    //uint32_t registro[12]={0,0,0,0,0,0,0,0,0,0,0,0};
     mostrar_valores(registro);
 	return 0;
 }

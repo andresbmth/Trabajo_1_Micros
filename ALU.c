@@ -2,35 +2,40 @@
 #include <stdlib.h>
 #include "ALU.h"
 
+#defeine N 0
+#defeine Z 1
+#defeine C 2
+#defeine V 3
+
 void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	 uint32_t d,n,m;     //variables auxiliares para revisar el bit 31 del registro
 	 d=(1<<31)&Rd;
 	 n=(1<<31)&Rn;
 	 m=(1<<31)&Rm;
 	 if(d){
-		 R_Banderas[0]=1;    // R_Banderas[0] Hace referencia a la bandera N (resultado negativo)
+		 R_Banderas[N]=1;    // R_Banderas[0] Hace referencia a la bandera N (resultado negativo)
 	 }else{
-		 R_Banderas[0]=0;
+		 R_Banderas[N]=0;
 	 }
 	 if(!Rd){
-		 R_Banderas[1]=1;  // R_Banderas[1] hace referencia a la bandera Z (resultado nulo)
+		 R_Banderas[Z]=1;  // R_Banderas[1] hace referencia a la bandera Z (resultado nulo)
 	 }else{
-		 R_Banderas[1]=0;
+		 R_Banderas[Z]=0;
 	 } 
 	 if((n==m)&&(n==(1<<31))){
-		 R_Banderas[2]=1;  // R_Banderas[2] hace referencia a la bandera C (acarreo en el resultado)
+		 R_Banderas[C]=1;  // R_Banderas[2] hace referencia a la bandera C (acarreo en el resultado)
 	 }
 	 if(n!=m){
 		 if(!d){
-			 R_Banderas[2]=1;
+			 R_Banderas[C]=1;
 		 }else{
-			 R_Banderas[2]=0;
+			 R_Banderas[C]=0;
 		 }
 	 }
 	 if((n==m)&&(n!=d)){
-		 R_Banderas[3]=1; //R_Banderas[3] hace referencia a la bandera V (sofreflujo)
+		 R_Banderas[V]=1; //R_Banderas[3] hace referencia a la bandera V (sofreflujo)
 	 }else{
-		 R_Banderas[3]=0;
+		 R_Banderas[V]=0;
 	 }
 }
 

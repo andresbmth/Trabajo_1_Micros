@@ -1,3 +1,6 @@
 Doc/*
 *.o
 *.exe
+*.cbp
+*.depend
+*.layout
