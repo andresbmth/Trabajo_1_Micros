@@ -1,21 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <curses.h>
 #include "mostrar.h"
 #include "ALU.h"
+#include "desplazamiento.h"
+#include "branch.h"
 
-#defeine N 0
-#defeine Z 1
-#defeine C 2
-#defeine V 3
+#define N 0
+#define Z 1
+#define C 2
+#define V 3
 
 int main()
 {
 	int op;
-	uint32_t registro[12]={0,0,0,0,0,0,0,0,0,0,0,0};
+	uint32_t registro[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	char banderas[4];
 	do{
 		system("cls");
+		printf("seleccione la opcion 0 para  Prueba del branch\n");
 		printf("seleccione la opcion 1 para mostrar los valores de los registros\n");
 		printf("seleccione la opcion 2 para sumar registros \n");
 		printf("seleccione la opcion 3 para multiplicacion logica (AND) de registros \n");
@@ -42,7 +46,47 @@ int main()
 		
 		system("cls");
 		switch(op){		
-		
+			
+			case 0:
+				MOV(&registro[0],36);
+				BAL(&registro[15],2);
+				MOV(&registro[1],6);
+				BAL(&registro[15],4);
+				BL(&registro[15],6);
+				MOV(&registro[2],registro[0]);
+				BAL(&registro[15],10);
+				MOV(&registro[3],1);
+				BAL(&registro[15],12);
+				LSL(&registro[3],registro[3],31);
+				BAL(&registro[15],14);
+				MOV(&registro[0],0);
+				BAL(&registro[15],16);
+				MOV(&registro[4],0);
+				BAL(&registro[15],18);
+				do{
+					LSL(&registro[2],registro[2],1);
+					BAL(&registro[15],20);
+					ADD(&registro[4],registro[4],banderas[C],banderas);
+					BAL(&registro[15],22);
+					CMP(registro[4],registro[1],banderas);
+					BAL(&registro[15],24);
+					if(BCC(banderas,&registro[15],30)){
+						BAL(&registro[15],26);
+						ADD(&registro[0],registro[0],registro[3],banderas);
+						BAL(&registro[15],28);
+						SUB(&registro[4],registro[4],registro[1],banderas);
+						BAL(&registro[15],30);
+					}					
+					LSR(&registro[3],registro[3],1);
+					BAL(&registro[15],32);
+				}while(BNE(banderas,&registro[15],18));				
+				MOV(&registro[1],registro[4]);
+				BAL(&registro[15],30);
+				BX(&registro[15]);
+				//while(1){};
+				mostrar_valores(registro);
+			break;
+			
 			case 1:			
 				mostrar_valores(registro);			
 			break;
@@ -261,10 +305,15 @@ int main()
 				REVSH(&registro[0],registro[1]);
 				
 				printf("%d valor del resultado \n",registro[0]);
-			break;		
+			break;	
+			
+			default:
+				printf("Opcion invalida\n\n");
+			break;
 		}
 		printf("\nDesea realizar otra operacion?\n<1>-si\n<0>-no\n");
 		scanf("%d",&op);
 		system("cls");
 		}while(op);
+		return 0;
 }

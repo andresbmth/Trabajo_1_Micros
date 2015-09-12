@@ -5,12 +5,13 @@
 #include "ALU.h"
 #include "curses.h"
 #include "desplazamiento.h"
+#include "branch.h"
 
 
 
 int main()
 {
-	uint32_t registro[12]={2,4,5,0,0,0,0,0,0,0,0,0};
+	uint32_t registro[16]={2,4,5,0,0,0,0,0,0,0,0,0,0,0,0};
 	char R_bandera[4];
 	initscr();		/* Inicia modo curses */
 	curs_set(0);	/* Cursor Invisible */

@@ -8,7 +8,7 @@ all:	obj
 
 test:	obj
 	rm -f main.o
-	$(cc) -o test.exe *.o
+	$(cc) -o test.exe *.o -lpdcurses
 	rm -f *.o	
 
 obj:

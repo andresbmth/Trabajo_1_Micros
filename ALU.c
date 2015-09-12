@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "ALU.h"
 
-#defeine N 0
-#defeine Z 1
-#defeine C 2
-#defeine V 3
+#define N 0
+#define Z 1
+#define C 2
+#define V 3
 
 void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	 uint32_t d,n,m;     //variables auxiliares para revisar el bit 31 del registro
