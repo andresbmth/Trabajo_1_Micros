@@ -23,10 +23,8 @@ int main()
     init_pair(2,COLOR_YELLOW,COLOR_BLACK);
 
 
-
-
-    mostrar_valores(registro);
     attron(COLOR_PAIR(1));  /* Activa el color morado para el texto y negro para el fondo Pair 1*/
+    mostrar_valores(registro);
 
     ADD(&registro[0],registro[1],registro[2],R_bandera);
 	move(6,17);

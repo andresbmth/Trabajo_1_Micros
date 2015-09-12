@@ -21,7 +21,7 @@ void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 		 R_Banderas[Z]=1;  // R_Banderas[1] hace referencia a la bandera Z (resultado nulo)
 	 }else{
 		 R_Banderas[Z]=0;
-	 } 
+	 }
 	 if((n==m)&&(n==(1<<31))){
 		 R_Banderas[C]=1;  // R_Banderas[2] hace referencia a la bandera C (acarreo en el resultado)
 	 }
