@@ -6,141 +6,143 @@
 #define Z 1
 #define C 2
 #define V 3
+#define LR 14
+#define PC 15
 
-char BEQ(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[Z]==1){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BNE(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BNE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[Z]==0){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BCS(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BCS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[C]==1){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BCC(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BCC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[C]==0){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BMI(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BMI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]==1){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BPL(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BPL(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]==0){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BVS(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BVS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[V]==1){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BVC(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BVC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[V]==0){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
-char BHI(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BHI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[C]==1)&&(R_Banderas[Z]==0)){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BLS(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BLS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[C]==0)||(R_Banderas[Z]==1)){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BGE(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BGE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]==R_Banderas[V]){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BLT(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BLT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]!=R_Banderas[V]){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BGT(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BGT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[Z]==0)&&(R_Banderas[N]==R_Banderas[V])){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BLE(char *R_Banderas,uint32_t *PC,uint32_t Posicion){
+char BLE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[Z]==0)||(R_Banderas[N]!=R_Banderas[V])){
-		*PC=Posicion;
+		Registro[PC]=Posicion;
 		return 1;
 	}else{
 		return 0;
 	}
 }
 
-char BAL(uint32_t *PC,uint32_t Posicion){
-	*PC=Posicion;
+char BAL(uint32_t *Registro,uint32_t Posicion){
+	Registro[PC]=Posicion;
 	return 1;
 }
 
-void BL(uint32_t *PC,uint32_t Posicion){
-	*(PC-1)=Posicion;      // El registro PC es el 15 y LR 14 entoncs *(PC-1) es LR 
+void BL(uint32_t *Registro,uint32_t Posicion){
+	Registro[LR]=Posicion;      
 }
 
-void BX(uint32_t *PC){
-	*PC=*(PC-1);          // El registro PC es el 15 y LR 14 entoncs *(PC-1) es LR 
+void BX(uint32_t *Registro){
+	Registro[PC]=Registro[LR];
 }

@@ -11,6 +11,8 @@
 #define Z 1
 #define C 2
 #define V 3
+#define LR 14
+#define PC 15
 
 int main()
 {
@@ -108,7 +110,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				CMN(registro[1],registro[2],&banderas[0]);
+				CMN(&registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -123,7 +125,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				CMP(registro[1],registro[2],&banderas[0]);
+				CMP(&registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -153,7 +155,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				TST(registro[1],registro[2],&banderas[0]);
+				TST(&registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -236,7 +238,7 @@ int main()
 			break;
 			
 			case 18:			
-				NOP();
+				NOP(registro);
 			break;
 			
 			case 19:			

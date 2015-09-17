@@ -110,19 +110,19 @@ void SBC(uint32_t *Rd,char *R_Banderas);  // Resta con carry
 
 /**
 * \brief <center><b>Funcion CMN</b></center>
-* \param Rn valor del primer registro
+* \param *Rn puntero del registro
 * \param Rm valor del segundo registro
 * \param *R_Banderas registro de las banderas
 */
-void CMN(uint32_t Rn, uint32_t Rm,char *R_Banderas);
+void CMN(uint32_t *Rn, uint32_t Rm,char *R_Banderas);
 
 /**
 * \brief <center><b>Funcion CMN</b></center>
-* \param Rn valor del primer registro
+* \param *Rn puntero del primer registro
 * \param Rm valor del segundo registro
 * \param *R_Banderas registro de las banderas
 */
-void CMP(uint32_t Rn, uint32_t Rm,char *R_Banderas);
+void CMP(uint32_t *Rn, uint32_t Rm,char *R_Banderas);
 
 /**
 * \brief <center><b>Funcion MUL</b></center>
@@ -135,8 +135,8 @@ void MUL(uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas);
 
 /**
 * \brief <center><b>Funcion TST</b></center>
-* \param Rn valor del primer registro
+* \param *Rn puntero del primer registro
 * \param Rm valor del segundo registro
 * \param *R_Banderas registro de las banderas
 */
-void TST(uint32_t Rn, uint32_t Rm,char *R_Banderas);
+void TST(uint32_t *Rn, uint32_t Rm,char *R_Banderas);

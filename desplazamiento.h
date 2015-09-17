@@ -65,9 +65,9 @@ void RSB(uint32_t *Rd, uint32_t Rn, int inmediato,char *R_Banderas);
 
 /**
 * \brief <center><b>Funcion NOP No hace nada en un tiempo o flanco de relojo</b></center>  
-* \param La funcion no tiene parametros de entrada
+* \param *Registro Puntero al registro
 */
-void NOP(void);
+void NOP(uint32_t *Registro);
 
 
 /**
