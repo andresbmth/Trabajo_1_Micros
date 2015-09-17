@@ -11,7 +11,7 @@
 
 char BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[Z]==1){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -20,7 +20,7 @@ char BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BNE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[Z]==0){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -29,7 +29,7 @@ char BNE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BCS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[C]==1){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -38,7 +38,7 @@ char BCS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BCC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[C]==0){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -47,7 +47,7 @@ char BCC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BMI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]==1){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -56,7 +56,7 @@ char BMI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BPL(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]==0){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -65,7 +65,7 @@ char BPL(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BVS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[V]==1){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -74,7 +74,7 @@ char BVS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BVC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[V]==0){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -82,7 +82,7 @@ char BVC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 }
 char BHI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[C]==1)&&(R_Banderas[Z]==0)){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -91,7 +91,7 @@ char BHI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BLS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[C]==0)||(R_Banderas[Z]==1)){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -100,7 +100,7 @@ char BLS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BGE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]==R_Banderas[V]){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -109,7 +109,7 @@ char BGE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BLT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if(R_Banderas[N]!=R_Banderas[V]){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -118,7 +118,7 @@ char BLT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BGT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[Z]==0)&&(R_Banderas[N]==R_Banderas[V])){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -127,7 +127,7 @@ char BGT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 
 char BLE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 	if((R_Banderas[Z]==0)||(R_Banderas[N]!=R_Banderas[V])){
-		Registro[PC]=Posicion;
+		Registro[PC]+=Posicion;
 		return 1;
 	}else{
 		return 0;
@@ -135,12 +135,13 @@ char BLE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
 }
 
 char BAL(uint32_t *Registro,uint32_t Posicion){
-	Registro[PC]=Posicion;
+	Registro[PC]+=Posicion;
 	return 1;
 }
 
 void BL(uint32_t *Registro,uint32_t Posicion){
-	Registro[LR]=Posicion;      
+	Registro[LR]=Posicion; 
+	Registro[PC]+=2;
 }
 
 void BX(uint32_t *Registro){

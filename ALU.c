@@ -88,29 +88,29 @@ void Bandera_V(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	}
 }
 
-void ADC(uint32_t *Rd,char *R_Banderas){
+void ADC(uint32_t *Registro,uint32_t *Rd,char *R_Banderas){
 	*Rd=*Rd+R_Banderas[C];    // Suma con carry
 	Bandera_N(*Rd,R_Banderas);
 	Bandera_Z(*Rd,R_Banderas);
 	Bandera_C(*Rd,*Rd,R_Banderas[C],R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void ADD(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+void ADD(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
     *Rd=Rn+Rm;  //suma de registros
 	Banderas(*Rd,Rn,Rm,R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void AND(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+void AND(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
     *Rd=Rn&Rm;  // multiplicacion de registros
 	Bandera_N(*Rd,R_Banderas);
 	Bandera_Z(*Rd,R_Banderas);
 	Bandera_C(*Rd,Rn,Rm,R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+void EOR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
     *Rd=Rn^Rm;  // EOR a nivel de bits
 	Bandera_N(*Rd,R_Banderas);
 	Bandera_Z(*Rd,R_Banderas);
@@ -118,53 +118,53 @@ void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	Rd[PC]+=2;
 }
 
-void MOV(uint32_t *Rd,uint32_t Rn,char *R_Banderas){
+void MOV(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,char *R_Banderas){
     *Rd=Rn;  // despalazamiento de un resgistro a otro
 	Bandera_N(*Rd,R_Banderas);
 	Bandera_Z(*Rd,R_Banderas);	
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void ORR(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+void ORR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
     *Rd=Rn|Rm;  // orr a nivel de bits
 	Bandera_N(*Rd,R_Banderas);
 	Bandera_Z(*Rd,R_Banderas);
 	Bandera_C(*Rd,Rn,Rm,R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void SUB(uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+void SUB(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
     *Rd=Rn-Rm;   // resta a nivel de bits
 	Banderas(*Rd,Rn,Rm,R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void SBC(uint32_t *Rd,char *R_Banderas){
+void SBC(uint32_t *Registro,uint32_t *Rd,char *R_Banderas){
 	*Rd=*Rd-R_Banderas[C];   // Resta con carry
 	Banderas(*Rd,*Rd,R_Banderas[C],R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void CMN(uint32_t *Rn, uint32_t Rm,char *R_Banderas){
-	Banderas(*Rn+Rm,*Rn,Rm,R_Banderas);     //ADN sin almacenar, solo modifica banderas
-	Rn[PC]+=2;
+void CMN(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	Banderas(Rn+Rm,Rn,Rm,R_Banderas);     //ADN sin almacenar, solo modifica banderas
+	Registro[PC]++;
 }
 
-void CMP(uint32_t *Rn, uint32_t Rm,char *R_Banderas){
-	Banderas(*Rn-Rm,*Rn,Rm,R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
-	Rn[PC]+=2;
+void CMP(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	Banderas(Rn-Rm,Rn,Rm,R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
+	Registro[PC]++;
 }
 
-void MUL(uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas){
+void MUL(uint32_t *Registro,uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas){
 	*Rd=Rn*Rm;            //Multiplicacion de registros, solo se alacenan 32 bits menos significativos
 	Bandera_N(*Rd,R_Banderas);
 	Bandera_Z(*Rd,R_Banderas);
-	Rd[PC]+=2;
+	Registro[PC]++;
 }
 
-void TST(uint32_t *Rn, uint32_t Rm,char *R_Banderas){
-	Bandera_N(*Rn&Rm,R_Banderas);
-	Bandera_Z(*Rn&Rm,R_Banderas);
-	Bandera_C(*Rn&Rm,*Rn,Rm,R_Banderas);  //AND sin almacenacmiento, solo modifica banderas
-	Rn[PC]+=2;
+void TST(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
+	Bandera_N(Rn&Rm,R_Banderas);
+	Bandera_Z(Rn&Rm,R_Banderas);
+	Bandera_C(Rn&Rm,Rn,Rm,R_Banderas);  //AND sin almacenacmiento, solo modifica banderas
+	Registro[PC]++;
 }

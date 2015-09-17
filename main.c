@@ -26,7 +26,7 @@ int main()
     attron(COLOR_PAIR(1));  /* Activa el color morado para el texto y negro para el fondo Pair 1*/
     mostrar_valores(registro);
 
-    ADD(&registro[0],registro[1],registro[2],R_bandera);
+    ADD(registro,&registro[0],registro[1],registro[2],R_bandera);
 	move(6,17);
     attron(COLOR_PAIR(2));
     printw("Resultados obtenidos de las operaciones ADD=\n %d",registro[0]);

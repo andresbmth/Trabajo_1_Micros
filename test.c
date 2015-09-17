@@ -47,7 +47,7 @@ int main()
 		
 		system("cls");
 		switch(op){		
-			
+
 			case 1:			
 				mostrar_valores(registro);			
 			break;
@@ -58,7 +58,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				ADD(&registro[0],registro[1],registro[2],&banderas[0]);
+				ADD(registro,&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -73,7 +73,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 					
-				AND(&registro[0],registro[1],registro[2],&banderas[0]);
+				AND(registro,&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -88,7 +88,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				EOR(&registro[0],registro[1],registro[2],&banderas[0]);
+				EOR(registro,&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -101,7 +101,9 @@ int main()
 				printf("ingrese el valor del registro origen:\n");
 				scanf("%d",&registro[1]);
 				
-				MOV(&registro[0],registro[1],banderas);
+				MOV(registro,&registro[0],registro[1],banderas);
+				
+				printf("%d valor del resultado \n",registro[0]);
 			break;
 			
 			case 7:
@@ -110,7 +112,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				CMN(&registro[1],registro[2],&banderas[0]);
+				CMN(registro,registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -125,7 +127,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				CMP(&registro[1],registro[2],&banderas[0]);
+				CMP(registro,registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -140,7 +142,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				MUL(&registro[0],registro[1],registro[2],&banderas[0]);
+				MUL(registro,&registro[0],registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -155,7 +157,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[2]);
 				
-				TST(&registro[1],registro[2],&banderas[0]);
+				TST(registro,registro[1],registro[2],&banderas[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 				printf("%d valor del resultado bandera n \n",banderas[N]);
@@ -170,7 +172,7 @@ int main()
 				printf("ingrese el numero de desplazamientos:\n");
 				scanf("%d",&registro[2]);
 				
-				LSL(&registro[0],registro[1],registro[2],banderas);
+				LSL(registro,&registro[0],registro[1],registro[2],banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -181,7 +183,7 @@ int main()
 				printf("ingrese elnumero de desplazamientos:\n");
 				scanf("%d",&registro[2]);
 				
-				LSR(&registro[0],registro[1],registro[2],banderas);
+				LSR(registro,&registro[0],registro[1],registro[2],banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;			
@@ -192,7 +194,7 @@ int main()
 				printf("ingrese elnumero de desplazamientos:\n");
 				scanf("%d",&registro[2]);
 				
-				ROR(&registro[0],registro[1],registro[2],banderas);
+				ROR(registro,&registro[0],registro[1],registro[2],banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -203,7 +205,7 @@ int main()
 				printf("ingrese elnumero de desplazamientos:\n");
 				scanf("%d",&registro[2]);
 				
-				ASR(&registro[0],registro[1],registro[2],banderas);
+				ASR(registro,&registro[0],registro[1],registro[2],banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -214,7 +216,7 @@ int main()
 				printf("ingrese el valor del segundo registro:\n");
 				scanf("%d",&registro[1]);
 				
-				BIC(&registro[0],registro[1],banderas);
+				BIC(registro,&registro[0],registro[1],banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -223,7 +225,7 @@ int main()
 				printf("ingrese un valor del registro origen\n");
 				scanf("%d",&registro[1]);
 				
-				MVN(&registro[0],registro[1],banderas);
+				MVN(registro,&registro[0],registro[1],banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -232,7 +234,7 @@ int main()
 				printf("ingrese un valor de registro\n");
 				scanf("%d",&registro[1]);	
 				
-				RSB(&registro[0],registro[1],0,banderas);
+				RSB(registro,&registro[0],registro[1],0,banderas);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -245,7 +247,7 @@ int main()
 				printf("ingrese un valor de registro \n");
 				scanf("%d",&registro[1]);
 				
-				REV(&registro[0],registro[1]);
+				REV(registro,&registro[0],registro[1]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -254,7 +256,7 @@ int main()
 				printf("ingrese un valor de registro \n");
 				scanf("%d",&registro[1]);
 				
-				REVIG(&registro[0],registro[1]);
+				REVIG(registro,&registro[0],registro[1]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
@@ -263,7 +265,7 @@ int main()
 				printf("ingrese un valor de registro \n");
 				scanf("%d",&registro[1]);
 				
-				REVSH(&registro[0],registro[1]);
+				REVSH(registro,&registro[0],registro[1]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;	
