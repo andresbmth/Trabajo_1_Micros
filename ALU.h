@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-/**
+/** \fn void Banderas(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas)
 * \brief <center><b>Funcion para las banderas</b></center>
 * \param Rd valor resultante de la operacion realizada anteriormente
 * \param Rn primer valor de la operacion realizara anteriormente
@@ -9,21 +9,21 @@
 */ 
 void Banderas(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 
-/**
+/** \fn void Bandera_N(uint32_t Rd, char *R_Banderas)
 * \brief <center><b>Funcion para la bandera N de negativo</b></center>
 * \param Rd valor resultante de la operacion realizada anteriormente
 * \param *R_Banderas registro donde se almacenan las banderas
 */ 
 void Bandera_N(uint32_t Rd, char *R_Banderas);
 
-/**
+/** \fn void Bandera_Z(uint32_t Rd, char *R_Banderas)
 * \brief <center><b>Funcion para la bandera Z de cero</b></center>
 * \param Rd valor resultante de la operacion realizada anteriormente
 * \param *R_Banderas registro donde se almacenan las banderas
 */ 
 void Bandera_Z(uint32_t Rd, char *R_Banderas);
 
-/**
+/** \fn void Bandera_C(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas)
 * \brief <center><b>Funcion para la bandera C de carry</b></center>
 * \param Rd valor resultante de la operacion realizada anteriormente
 * \param Rn primer valor de la operacion realizara anteriormente
@@ -32,7 +32,7 @@ void Bandera_Z(uint32_t Rd, char *R_Banderas);
 */ 
 void Bandera_C(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 
-/**
+/** \fn void Bandera_V(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas)
 * \brief <center><b>Funcion para la bandera V de sobreflujo</b></center>
 * \param Rd valor resultante de la operacion realizada anteriormente
 * \param Rn primer valor de la operacion realizara anteriormente
@@ -41,8 +41,8 @@ void Bandera_C(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 */ 
 void Bandera_V(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion ADC</b></center>
+/** \fn void ADC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion ADC Suma con carry</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor de registro 
@@ -51,8 +51,8 @@ void Bandera_V(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 */
 void ADC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);  // Suma con carry
 
-/**
-* \brief <center><b>Funcion ADD</b></center>
+/** \fn void ADD(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion ADD Suma</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor del segundo registro
@@ -61,8 +61,8 @@ void ADC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void ADD(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion AND</b></center>
+/** \fn void AND(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion AND Multiplicacion logica</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor del segundo registro
@@ -71,8 +71,8 @@ void ADD(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void AND(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion EOR</b><center>
+/** \fn void EOR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion EOR Exor</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor del segundo registro
@@ -81,8 +81,8 @@ void AND(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void EOR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion MOV</b></center>
+/** \fn void MOV(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,char *R_Banderas);
+* \brief <center><b>Funcion MOV Mover un valor de registro a otro</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del registro de destino
 * \param Rn valor de registro orgien
@@ -90,8 +90,8 @@ void EOR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void MOV(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion ORR</b></center>
+/** \fn void ORR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion ORR Suma logica</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor del segundo registro
@@ -100,8 +100,8 @@ void MOV(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,char *R_Banderas);
 */
 void ORR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion SUB</b></center>
+/** \fn void SUB(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion SUB Resta </b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor del segundo registro
@@ -110,8 +110,8 @@ void ORR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void SUB(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion SBC</b></center>
+/** \fn void SBC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion SBC Resta con carry</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del registro
 * \param Rn valor de registro 
@@ -120,8 +120,8 @@ void SUB(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void SBC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);  // Resta con carry
 
-/**
-* \brief <center><b>Funcion CMN</b></center>
+/** \fn void CMN(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion CMN Suma sin resultado, solo modifica banderas</b></center>
 * \param *Registro Puntero al registro
 * \param Rn Valor del primer registro
 * \param Rm valor del segundo registro
@@ -129,8 +129,8 @@ void SBC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 */
 void CMN(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion CMN</b></center>
+/** \fn void CMP(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion CMP Resta sin resultado, solo modifica banderas</b></center>
 * \param *Registro Puntero al registro
 * \param Rn Valor del primer registro
 * \param Rm valor del segundo registro
@@ -138,8 +138,8 @@ void CMN(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas);
 */
 void CMP(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion MUL</b></center>
+/** \fn void MUL(uint32_t *Registro,uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas)
+* \brief <center><b>Funcion MUL Multiplicacion de registros</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
 * \param Rn valor del segundo registro
@@ -148,8 +148,8 @@ void CMP(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas);
 */
 void MUL(uint32_t *Registro,uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Banderas);
 
-/**
-* \brief <center><b>Funcion TST</b></center>
+/** \fn void TST(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas);
+* \brief <center><b>Funcion TST Multiplicacion logica sin resultado, solo modifica registros</b></center>
 * \param *Registro Puntero al registro
 * \param Rn Valor del registro
 * \param Rm valor del registro

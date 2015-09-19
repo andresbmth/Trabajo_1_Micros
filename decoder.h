@@ -25,31 +25,33 @@ typedef struct
 }instruction_t;
 
 
-/** \fn void decodeInstruction(instruction_t instruction)
-    \brief Decodifica la instrucción y la ejecuta.
-    \param instruction instrucción a decodificar y ejecutar.
+/** \fn void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas)
+* \brief Decodifica la instrucción y la ejecuta
+* \param instruction instrucción a decodificar y ejecutar
+* \param *Registro Puntero al registro
+* \param *R_Banderas Puntero a las banderas
 */
 void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas);
 
 /** \fn instruction_t getInstruction(char* instStr)
-    \brief Obtiene la instrucción separada por partes.
-    \param instrStr cadena que contiene la instrucción.
-	\return instruction_t la instrucción separada por partes.
+* \brief Obtiene la instrucción separada por partes
+* \param instrStr cadena que contiene la instrucción
+* \return instruction_t la instrucción separada por partes
 */
 instruction_t getInstruction(char* instStr);
 
 /** \fn int readFile(char** instructions)
-    \brief Lee instrucciones de un archivo.
-    \param filename Nombre del archivo.
-    \param instructions estructura con arreglo con las instrucciones leidas.
-	\return Entero indicando la cantidad de líneas.
+* \brief Lee instrucciones de un archivo
+* \param filename Nombre del archivo
+* \param instructions estructura con arreglo con las instrucciones leidas
+* \return Entero indicando la cantidad de líneas
 */
 int readFile(char* filename, ins_t* instructions);
 
 /** \fn int countLines(FILE fp)
-    \brief Cuenta la cantidad de líneas de un archivo.
-    \param fp Puntero al archivo.
-	\return Entero con la cantidad de líneas del archivo.
+* \brief Cuenta la cantidad de líneas de un archivo
+* \param fp Puntero al archivo
+* \return Entero con la cantidad de líneas del archivo
 */
 int countLines(FILE* fp);
 
