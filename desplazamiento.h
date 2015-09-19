@@ -81,23 +81,20 @@ void NOP(uint32_t *Registro);
 * \brief <center><b>Funcion REV realiza grupos de 8 bits y los rota</b></center>  
 * \param *Registro Puntero al registro
 * \param Rd Primer registro
-* \param Rn Segudo registro o valor inmediato
 */
-void REV(uint32_t *Registro,uint32_t *Rd, uint32_t Rn);
+void REV(uint32_t *Registro,uint32_t *Rd);
 
 /**
 * \brief <center><b>Funcion REVIG realiza grupos de 16 bits y los rota</b></center>  
 * \param *Registro Puntero al registro
 * \param Rd Primer registro
-* \param Rn Segudo registro o valor inmediato
 */
-void REVIG(uint32_t *Registro,uint32_t *Rd, uint32_t Rn);
+void REVIG(uint32_t *Registro,uint32_t *Rd);
 
 
 /**
 * \brief <center><b>Funcion REVSH realiza extension de signo</b></center>
 * \param *Registro Puntero al registro
 * \param Rd Primer registro
-* \param Rn Segudo registro o valor inmediato
 */
-void REVSH(uint32_t *Registro,uint32_t *Rd, uint32_t Rn);
+void REVSH(uint32_t *Registro,uint32_t *Rd);

@@ -24,16 +24,11 @@ void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	}else{
 		R_Banderas[Z]=0;
 	}
-	if((n==m)&&(n==(1<<31))){
-		R_Banderas[C]=1;  // R_Banderas[2] hace referencia a la bandera C (acarreo en el resultado)
-	}
-	if(n!=m){
-		if(!d){
-			R_Banderas[C]=1;
-		}else{
-			R_Banderas[C]=0;
-		}
-	}
+	if(((n)&&(m==0)&&(d==0))||((m)&&(n==0)&&(d==0))||((n)&&(m))){
+		R_Banderas[C]=1;
+	}else{					 //R_Banderas[2] hace referencia a la bandera C (Carry)
+		R_Banderas[C]=0;
+	}		
 	if((n==m)&&(n!=d)){
 		R_Banderas[V]=1; //R_Banderas[3] hace referencia a la bandera V (sofreflujo)
 	}else{
@@ -64,16 +59,11 @@ void Bandera_C(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	d=(1<<31)&Rd;
 	n=(1<<31)&Rn;
 	m=(1<<31)&Rm;
-	if((n==m)&&(n==(1<<31))){
-		R_Banderas[C]=1;  // R_Banderas[2] hace referencia a la bandera C (acarreo en el resultado)
-	}
-	if(n!=m){
-		if(!d){
-			R_Banderas[C]=1;
-		}else{
-			R_Banderas[C]=0;
-		}
-	}
+	if(((n)&&(m==0)&&(d==0))||((m)&&(n==0)&&(d==0))||((n)&&(m))){
+		R_Banderas[C]=1;
+	}else{
+		R_Banderas[C]=0;
+	}		
 }
 
 void Bandera_V(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
@@ -88,11 +78,9 @@ void Bandera_V(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	}
 }
 
-void ADC(uint32_t *Registro,uint32_t *Rd,char *R_Banderas){
-	*Rd=*Rd+R_Banderas[C];    // Suma con carry
-	Bandera_N(*Rd,R_Banderas);
-	Bandera_Z(*Rd,R_Banderas);
-	Bandera_C(*Rd,*Rd,R_Banderas[C],R_Banderas);
+void ADC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+	*Rd=Rn+Rm+R_Banderas[C];    // Suma con carry
+	Banderas(*Rd,Rn,Rm,R_Banderas);
 	Registro[PC]++;
 }
 
@@ -134,14 +122,14 @@ void ORR(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 }
 
 void SUB(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
-    *Rd=Rn-Rm;   // resta a nivel de bits
-	Banderas(*Rd,Rn,Rm,R_Banderas);
+    *Rd=Rn+((~Rm)+1);   // resta a nivel de bits
+	Banderas(*Rd,Rn,(~Rm)+1,R_Banderas);
 	Registro[PC]++;
 }
 
-void SBC(uint32_t *Registro,uint32_t *Rd,char *R_Banderas){
-	*Rd=*Rd-R_Banderas[C];   // Resta con carry
-	Banderas(*Rd,*Rd,R_Banderas[C],R_Banderas);
+void SBC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
+	*Rd=Rn+(~Rm)+R_Banderas[C];   // Resta con carry
+	Banderas(*Rd,Rn,(~Rm),R_Banderas);
 	Registro[PC]++;
 }
 
@@ -151,7 +139,7 @@ void CMN(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
 }
 
 void CMP(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
-	Banderas(Rn-Rm,Rn,Rm,R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
+	Banderas(Rn+(~Rm+1),Rn,Rm,R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
 	Registro[PC]++;
 }
 

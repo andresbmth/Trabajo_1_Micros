@@ -9,141 +9,130 @@
 #define LR 14
 #define PC 15
 
-char BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[Z]==1){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BNE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BNE(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[Z]==0){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BCS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BCS(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[C]==1){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BCC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BCC(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[C]==0){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BMI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BMI(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[N]==1){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BPL(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BPL(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[N]==0){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BVS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BVS(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[V]==1){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BVC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BVC(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[V]==0){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
-char BHI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BHI(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if((R_Banderas[C]==1)&&(R_Banderas[Z]==0)){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BLS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BLS(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if((R_Banderas[C]==0)||(R_Banderas[Z]==1)){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BGE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BGE(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[N]==R_Banderas[V]){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BLT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BLT(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if(R_Banderas[N]!=R_Banderas[V]){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BGT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BGT(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if((R_Banderas[Z]==0)&&(R_Banderas[N]==R_Banderas[V])){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BLE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion){
+void BLE(char *R_Banderas,uint32_t *Registro,uint32_t Label){
 	if((R_Banderas[Z]==0)||(R_Banderas[N]!=R_Banderas[V])){
-		Registro[PC]+=Posicion;
-		return 1;
+		Registro[PC]+=Label;
 	}else{
-		return 0;
+		Registro[PC]++;
 	}
 }
 
-char BAL(uint32_t *Registro,uint32_t Posicion){
-	Registro[PC]+=Posicion;
-	return 1;
+void BAL(uint32_t *Registro,uint32_t Label){
+	Registro[PC]+=Label;
 }
 
-void BL(uint32_t *Registro,uint32_t Posicion){
-	Registro[LR]=Posicion; 
+void BL(uint32_t *Registro,uint32_t Label){
+	Registro[LR]=Label+1; 
 	Registro[PC]+=2;
 }
 
 void BX(uint32_t *Registro){
 	Registro[PC]=Registro[LR];
+}
+
+void B(uint32_t *Registro,uint32_t Label){
+	Registro[PC]=Label;
 }

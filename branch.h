@@ -4,145 +4,137 @@
 * \brief <center><b>BEQ Salto si es igual</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BEQ(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BNE Salto si no es igual</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BNE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BNE(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BCS Salto si es mayor o igual (sin signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BCS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BCS(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BCC salto si es menor (sin signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BCC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BCC(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BMI Salto si es negativo</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BMI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BMI(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BPL Salto si es positivo</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BPL(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BPL(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BVS Salto si hay sobreflujo</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BVS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BVS(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BVC Salto si no hay sobreflujo</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BVC(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BVC(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BHI Salto si es mayor (sin signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BHI(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BHI(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BLS Salto si es menor o igual (sin signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BLS(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BLS(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BGE Salto si es mayor o igual (con signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BGE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BGE(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BLT Salto si es menor (con signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BLT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BLT(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BGT Salto si es mayor (con signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BGT(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BGT(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BLE Salto si es menor o igual (con signo)</b></center>
 * \param *R_Banderas Puntero para el registro de las banderas
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BLE(char *R_Banderas,uint32_t *Registro,uint32_t Posicion);
+void BLE(char *R_Banderas,uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BAL Salto sin condicion, de cualquier forma</b></center>
 * \param *Registro Puntero a el registro
-* \param Posicion Siguiente posicion
-* \return Indicativo si se cumple el salto o no
+* \param Label Posicion de salto
 */ 
-char BAL(uint32_t *Registro,uint32_t Posicion);
+void BAL(uint32_t *Registro,uint32_t Label);
 
 /**
 * \brief <center><b>BL Salto guardando posicion instruccion siguiente en LR</b></center>
 * \param *Registro Puntero a el registro 
-* \param Posicion Siguiente posicion
+* \param Label Posicion de salto
 */ 
-void BL(uint32_t *Registro,uint32_t Posicion); 
+void BL(uint32_t *Registro,uint32_t Label); 
 
 /**
 * \brief <center><b>BX Salta a la posicion guardada en LR</b></center>
 * \param *Registro Puntero a el registro
 */ 
 void BX(uint32_t *Registro);
+
+/**
+* \brief <center><b>B Salto sin condicion, de cualquier forma</b></center>
+* \param *Registro Puntero a el registro
+* \param Label Posicion de salto
+*/ 
+void B(uint32_t *Registro,uint32_t Label);

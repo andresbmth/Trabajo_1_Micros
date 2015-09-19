@@ -49,7 +49,7 @@ int main()
 		switch(op){		
 
 			case 1:			
-				mostrar_valores(registro);			
+				//mostrar_valores(registro);			
 			break;
 			
 			case 2:			
@@ -245,27 +245,27 @@ int main()
 			
 			case 19:			
 				printf("ingrese un valor de registro \n");
-				scanf("%d",&registro[1]);
+				scanf("%d",&registro[0]);
 				
-				REV(registro,&registro[0],registro[1]);
+				REV(registro,&registro[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
 			
 			case 20:			
 				printf("ingrese un valor de registro \n");
-				scanf("%d",&registro[1]);
+				scanf("%d",&registro[0]);
 				
-				REVIG(registro,&registro[0],registro[1]);
+				REVIG(registro,&registro[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;
 			
 			case 21:			
 				printf("ingrese un valor de registro \n");
-				scanf("%d",&registro[1]);
+				scanf("%d",&registro[0]);
 				
-				REVSH(registro,&registro[0],registro[1]);
+				REVSH(registro,&registro[0]);
 				
 				printf("%d valor del resultado \n",registro[0]);
 			break;	

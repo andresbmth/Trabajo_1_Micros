@@ -45,9 +45,11 @@ void Bandera_V(uint32_t Rd, uint32_t Rn, uint32_t Rm, char *R_Banderas);
 * \brief <center><b>Funcion ADC</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del primer registro
+* \param Rn valor de registro 
+* \param Rm valor de registro
 * \param *R_Banderas registro de las banderas
 */
-void ADC(uint32_t *Registro,uint32_t *Rd,char *R_Banderas);  // Suma con carry
+void ADC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);  // Suma con carry
 
 /**
 * \brief <center><b>Funcion ADD</b></center>
@@ -112,9 +114,11 @@ void SUB(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Bandera
 * \brief <center><b>Funcion SBC</b></center>
 * \param *Registro Puntero al registro
 * \param *Rd puntero del registro
+* \param Rn valor de registro 
+* \param Rm valor de registro
 * \param *R_Banderas registro de las banderas
 */
-void SBC(uint32_t *Registro,uint32_t *Rd,char *R_Banderas);  // Resta con carry
+void SBC(uint32_t *Registro,uint32_t *Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas);  // Resta con carry
 
 /**
 * \brief <center><b>Funcion CMN</b></center>
