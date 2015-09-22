@@ -139,7 +139,7 @@ void CMN(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
 }
 
 void CMP(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
-	Banderas(Rn+(~Rm+1),Rn,Rm,R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
+	Banderas(Rn+(~Rm+1),Rn,(~Rm+1),R_Banderas);  //comparar (SUB sin almacenar), solo modifica banderas
 	Registro[PC]++;
 }
 

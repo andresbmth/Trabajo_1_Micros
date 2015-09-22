@@ -134,5 +134,5 @@ void BX(uint32_t *Registro){
 }
 
 void B(uint32_t *Registro,uint32_t Label){
-	Registro[PC]=Label;
+	Registro[PC]+=Label;
 }
