@@ -125,8 +125,8 @@ void BAL(uint32_t *Registro,uint32_t Label){
 }
 
 void BL(uint32_t *Registro,uint32_t Label){
-	Registro[LR]=Label+1; 
-	Registro[PC]+=2;
+	Registro[LR]=Registro[PC]+2; 
+	Registro[PC]+=Label;
 }
 
 void BX(uint32_t *Registro){
