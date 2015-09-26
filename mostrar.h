@@ -6,3 +6,5 @@
 * \param *R_Banderas Puntero a las banderas
 */
 void mostrar_valores(uint32_t *Registro,char *R_Banderas);
+
+void mostrar_memoria(uint8_t *Memory);

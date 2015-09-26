@@ -12,7 +12,7 @@
 
 int main()
 {
-	uint32_t Registro[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};	
+	uint32_t Registro[16]={1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0};	
 	char R_Banderas[4]={0,0,0,0};
 	int i, num_instructions;
 	ins_t read;
@@ -38,7 +38,6 @@ int main()
     start_color();	/* Permite manejar colores */
 	init_pair(1, COLOR_YELLOW, COLOR_BLACK);	/* Pair 1 -> Texto verde fondo Negro */
     init_pair(2,COLOR_WHITE,COLOR_BLACK);
-	border( ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 	do{
 		attron(COLOR_PAIR(1));
 		mvprintw(2,30,"EMULADOR CORTEX-M0");
@@ -47,16 +46,18 @@ int main()
 		mvprintw(21,25,"Automatico:");
 		mvprintw(21,47,"Salir:");
 		mvprintw(21,63,"Reiniciar:");
-		mvprintw(23,13,"Disminuir velocidad:");
-		mvprintw(23,43,"Aumentar velocidad:");
+		mvprintw(23,0,"Disminuir velocidad:");
+		mvprintw(23,30,"Aumentar velocidad:");
+		mvprintw(23,65,"RAM:");
 		attroff(COLOR_PAIR(1));	
 		attron(COLOR_PAIR(2));
 		mvprintw(21,16,"P");
 		mvprintw(21,37,"A");
 		mvprintw(21,54,"E");
 		mvprintw(21,74,"R");
-		mvprintw(23,34,"V");
-		mvprintw(23,63,"B");
+		mvprintw(23,21,"V");
+		mvprintw(23,50,"B");
+		mvprintw(23,70,"M");
 		attroff(COLOR_PAIR(2));
 		mostrar_valores(Registro,R_Banderas);
 		ch=getch();
@@ -86,6 +87,10 @@ int main()
 			op=1;
 			erase();
 		}
+		while(ch=='m'){
+			PUSH(Registro,0,1,2);
+			ch=getch();
+		}
 		if((ch=='p')||(op==0)){
 			attron(COLOR_PAIR(1));
 			mvprintw(2,30,"EMULADOR CORTEX-M0");
@@ -103,10 +108,9 @@ int main()
 			attroff(COLOR_PAIR(2));
 			erase();
 			instruction = getInstruction(instructions[Registro[PC]]);
-			decodeInstruction(instruction,Registro,R_Banderas);	
+			decodeInstruction(instruction,Registro,R_Banderas);
 		}
 	}while(ch!='e');
-	
 	for(i=0; i<num_instructions; i++){
 		free(read.array[i]);
 	}	

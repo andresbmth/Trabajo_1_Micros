@@ -11,9 +11,10 @@
 #define V 3
 #define LR 14
 #define PC 15
+#define TAM_MEMORY 60
 
 void mostrar_valores(uint32_t *Registro,char *R_Banderas){
-    int i;
+	int i;
 	attron(COLOR_PAIR(1));  
 	mvprintw(5,25,"Program Counter");
 	mvprintw(5,1,"Registro");
@@ -29,5 +30,28 @@ void mostrar_valores(uint32_t *Registro,char *R_Banderas){
 	mvprintw(13,25,"Z: %d",R_Banderas[Z]);
 	mvprintw(14,25,"C: %d",R_Banderas[C]);
 	mvprintw(15,25,"V: %d",R_Banderas[V]);
+	attroff(COLOR_PAIR(2));
+}
+
+void mostrar_memoria(uint8_t *Memory){
+	erase();
+	int i;
+	attron(COLOR_PAIR(1));
+	mvprintw(2,30,"RAM");
+	mvprintw(24,60,"Continuar:");
+	attroff(COLOR_PAIR(1));
+	attron(COLOR_PAIR(2));
+	mvprintw(24,71,"P");
+	for(i=0;i<=TAM_MEMORY;i++){
+		if(i<=20){
+			mvprintw(3+i,0,"%d",Memory[i]);
+		}
+		if((i>20)&&(i<=40)){
+			mvprintw(3+i-20,25,"%d",Memory[i]);
+		}
+		if(i>40){
+			mvprintw(3+i-40,50,"%d",Memory[i]);
+		}
+	}
 	attroff(COLOR_PAIR(2));
 }

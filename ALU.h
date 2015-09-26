@@ -156,3 +156,6 @@ void MUL(uint32_t *Registro,uint32_t *Rd,uint32_t Rn, uint32_t Rm,char *R_Bander
 * \param *R_Banderas registro de las banderas
 */
 void TST(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas);
+
+int Bitcount(int *R_activos);
+void PUSH(uint32_t *Registros,int R1,int R2,int R3);
