@@ -172,7 +172,7 @@ int Bitcount(int *R_activos){
 	if(R_activos[14]==1){
 		count++;
 	}
-	return count;
+	return count;  // retorna los registros activos 
 }
 
 void PUSH(uint32_t *Registro,int R1,int R2,int R3){
@@ -193,5 +193,5 @@ void PUSH(uint32_t *Registro,int R1,int R2,int R3){
 		}
 	}
 	Registro[SP]=Registro[SP]-4*Bitcount(R_activos);
-	mostrar_memoria(Memory);
+	mostrar_memoria(Memory);    // funcion para guardar los registors en a memoria
 }

@@ -53,5 +53,5 @@ void mostrar_memoria(uint8_t *Memory){
 			mvprintw(3+i-40,50,"%d",Memory[i]);
 		}
 	}
-	attroff(COLOR_PAIR(2));
+	attroff(COLOR_PAIR(2));   //imprime en pantalla la memoria que se realiza con los ciclos 
 }
