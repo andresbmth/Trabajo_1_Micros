@@ -8,10 +8,8 @@
 #define Z 1
 #define C 2
 #define V 3
-#define SP 13
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 60
 
 void Banderas(uint32_t Rd,uint32_t Rn,uint32_t Rm,char *R_Banderas){
 	uint32_t d,n,m;     //variables auxiliares para revisar el bit 31 del registro
@@ -159,39 +157,4 @@ void TST(uint32_t *Registro,uint32_t Rn, uint32_t Rm,char *R_Banderas){
 	Bandera_Z(Rn&Rm,R_Banderas);
 	Bandera_C(Rn&Rm,Rn,Rm,R_Banderas);  //AND sin almacenacmiento, solo modifica banderas 
 	Registro[PC]++;
-}
-
-int Bitcount(int *R_activos){
-	int i;
-	int count=0;
-	for(i=0;i<8;i++){
-		if(R_activos[i]==1){
-			count++;
-		}
-	}
-	if(R_activos[14]==1){
-		count++;
-	}
-	return count;  // retorna los registros activos 
-}
-
-void PUSH(uint32_t *Registro,int R1,int R2,int R3){
-	uint8_t Memory[TAM_MEMORY];
-	int i,R_activos[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},address;
-	Registro[SP]=TAM_MEMORY+1;
-	R_activos[R1]=1;
-	R_activos[R2]=1;
-	R_activos[R3]=1; 
-	address=Registro[SP]-4*Bitcount(R_activos);
-	for(i=0;i<15;i++){
-		if(R_activos[i]==1){
-			Memory[address]=(uint8_t)Registro[i];
-			Memory[address+1]=(uint8_t)(Registro[i]>>8);
-			Memory[address+2]=(uint8_t)(Registro[i]>>16);
-			Memory[address+3]=(uint8_t)(Registro[i]>>24);
-			address+=4;
-		}
-	}
-	Registro[SP]=Registro[SP]-4*Bitcount(R_activos);
-	mostrar_memoria(Memory);    // funcion para guardar los registors en a memoria
 }

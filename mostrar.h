@@ -7,4 +7,8 @@
 */
 void mostrar_valores(uint32_t *Registro,char *R_Banderas);
 
+/** \fn void mostrar_memoria(uint8_t *Memory);
+* \brief <center><b>Funcion mostrar_memoria</b></center>
+* \param *Memory Memoria
+*/
 void mostrar_memoria(uint8_t *Memory);

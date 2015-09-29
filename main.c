@@ -7,12 +7,18 @@
 #include "desplazamiento.h"
 #include "branch.h"
 #include "decoder.h"
+#include "memory.h"
 
+#define SP 13
+#define LR 14
 #define PC 15
+#define TAM_MEMORY 60
 
 int main()
 {
-	uint32_t Registro[16]={1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0};	
+	uint32_t Registro[16]={1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	uint8_t Memory[TAM_MEMORY];
+	int R_activos[16]={1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	char R_Banderas[4]={0,0,0,0};
 	int i, num_instructions;
 	ins_t read;
@@ -21,6 +27,7 @@ int main()
 	char ch=0;
 	char op=1;
 	int v=500;
+	Registro[SP]=TAM_MEMORY+1;
 	
 	num_instructions = readFile("code.txt", &read);
 	if(num_instructions==-1)
@@ -88,8 +95,10 @@ int main()
 			erase();
 		}
 		while(ch=='m'){
-			PUSH(Registro,0,1,2);
+			PUSH(Registro,Memory,R_activos);
+			mostrar_memoria(Memory);
 			ch=getch();
+			POP(Registro,Memory,R_activos);
 		}
 		if((ch=='p')||(op==0)){
 			attron(COLOR_PAIR(1));
