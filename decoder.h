@@ -22,6 +22,7 @@ typedef struct
 	uint32_t op1_value;
 	uint32_t op2_value;
 	uint32_t op3_value;
+	uint8_t  registers_list[16];
 }instruction_t;
 
 
@@ -31,7 +32,7 @@ typedef struct
 * \param *Registro Puntero al registro
 * \param *R_Banderas Puntero a las banderas
 */
-void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas);
+void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas,uint8_t *Memory);
 
 /** \fn instruction_t getInstruction(char* instStr)
 * \brief Obtiene la instrucción separada por partes

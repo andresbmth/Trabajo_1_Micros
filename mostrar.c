@@ -35,22 +35,23 @@ void mostrar_valores(uint32_t *Registro,char *R_Banderas){
 
 void mostrar_memoria(uint8_t *Memory){
 	erase();
+	clear();
 	int i;
 	attron(COLOR_PAIR(1));
 	mvprintw(2,30,"RAM");
-	mvprintw(24,60,"Continuar:");
+	mvprintw(24,60,"Salir:");
 	attroff(COLOR_PAIR(1));
 	attron(COLOR_PAIR(2));
-	mvprintw(24,71,"P");
-	for(i=0;i<=TAM_MEMORY;i++){
-		if(i<=20){
-			mvprintw(3+i,0,"%d",Memory[i]);
+	mvprintw(24,67,"S");
+	for(i=0;i<TAM_MEMORY;i++){
+		if(i<20){
+			mvprintw(3+i,5,"%d",Memory[i]);
 		}
-		if((i>20)&&(i<=40)){
-			mvprintw(3+i-20,25,"%d",Memory[i]);
+		if((i>=20)&&(i<40)){
+			mvprintw(3+i-20,30,"%d",Memory[i]);
 		}
-		if(i>40){
-			mvprintw(3+i-40,50,"%d",Memory[i]);
+		if(i>=40){
+			mvprintw(3+i-40,55,"%d",Memory[i]);
 		}
 	}
 	attroff(COLOR_PAIR(2));   //imprime en pantalla la memoria que se realiza con los ciclos 

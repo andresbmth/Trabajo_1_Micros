@@ -8,7 +8,7 @@
 #define PC 15
 #define TAM_MEMORY 60
 
-int Bitcount(int *R_activos){
+int Bitcount(uint8_t *R_activos){
 	int i;
 	int count=0;
 	for(i=0;i<8;i++){
@@ -22,7 +22,7 @@ int Bitcount(int *R_activos){
 	return count;  // retorna los registros activos 
 }
 
-void PUSH(uint32_t *Registro,uint8_t *Memory,int *R_activos){
+void PUSH(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos){
 	int i;
 	uint32_t address;
 	address=Registro[SP]-4*Bitcount(R_activos);
@@ -43,9 +43,10 @@ void PUSH(uint32_t *Registro,uint8_t *Memory,int *R_activos){
 		address+=4;
 	}
 	Registro[SP]=Registro[SP]-4*Bitcount(R_activos);
+	Registro[PC]++;
 }
 
-void POP(uint32_t *Registro,uint8_t *Memory,int *R_activos){
+void POP(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos){
 	int i;
 	uint32_t address;
 	address=Registro[SP];
@@ -67,4 +68,5 @@ void POP(uint32_t *Registro,uint8_t *Memory,int *R_activos){
 			Registro[PC]=Registro[PC]|(((uint32_t)Memory[address+3])<<24);
 	}
 	Registro[SP]=Registro[SP]+4*Bitcount(R_activos);
+	Registro[PC]++;
 }

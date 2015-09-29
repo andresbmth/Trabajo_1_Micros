@@ -16,9 +16,9 @@
 
 int main()
 {
-	uint32_t Registro[16]={1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	uint32_t Registro[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	uint8_t Memory[TAM_MEMORY];
-	int R_activos[16]={1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	uint32_t PCAux=0;
 	char R_Banderas[4]={0,0,0,0};
 	int i, num_instructions;
 	ins_t read;
@@ -27,9 +27,9 @@ int main()
 	char ch=0;
 	char op=1;
 	int v=500;
-	Registro[SP]=TAM_MEMORY+1;
+	Registro[SP]=TAM_MEMORY;
 	
-	num_instructions = readFile("code.txt", &read);
+	num_instructions = readFile("code2.txt", &read);
 	if(num_instructions==-1)
 		return 0;
 
@@ -67,6 +67,7 @@ int main()
 		mvprintw(23,70,"M");
 		attroff(COLOR_PAIR(2));
 		mostrar_valores(Registro,R_Banderas);
+		mvprintw(6,50,"%s",instructions[PCAux]);
 		ch=getch();
 		if((ch=='v')&&(v<=3000)){
 			v+=100;
@@ -93,12 +94,18 @@ int main()
 			timeout(-1);
 			op=1;
 			erase();
+			Registro[SP]=TAM_MEMORY;
+			PCAux=Registro[PC];
 		}
 		while(ch=='m'){
-			PUSH(Registro,Memory,R_activos);
 			mostrar_memoria(Memory);
 			ch=getch();
-			POP(Registro,Memory,R_activos);
+			if(ch=='s'){
+				erase();
+				break;
+			}else{
+				ch='m';
+			}
 		}
 		if((ch=='p')||(op==0)){
 			attron(COLOR_PAIR(1));
@@ -117,7 +124,9 @@ int main()
 			attroff(COLOR_PAIR(2));
 			erase();
 			instruction = getInstruction(instructions[Registro[PC]]);
-			decodeInstruction(instruction,Registro,R_Banderas);
+			mvprintw(6,50,"%s",instructions[Registro[PC]]);
+			PCAux=Registro[PC];
+			decodeInstruction(instruction,Registro,R_Banderas,Memory);
 		}
 	}while(ch!='e');
 	for(i=0; i<num_instructions; i++){
