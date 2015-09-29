@@ -4,13 +4,18 @@
 */
 int Bitcount(int *R_activos);
 
-/** \fn void PUSH(uint32_t *Registro,int R1,int R2,int R3);
+/** \fn void PUSH(uint32_t *Registro,uint8_t *Memory,int *R_activos);
 * \brief <center><b>Funcion PUSH</b></center>
 * \param *Registro Puntero al registro
-* \param Rn Valor del registro
-* \param Rm valor del registro
-* \param *R_Banderas registro de las banderas
+* \param *Memory puntero dirigido a la memoria
+* \param *R_activos puntero a los resgistros activos
 */
 void PUSH(uint32_t *Registro,uint8_t *Memory,int *R_activos);
 
+/** \fn void POP(uint32_t *Registro,uint8_t *Memory,int *R_activos);
+* \brief <center><b>Funcion POP</b></center>
+* \param *Registro Puntero al registro
+* \param *Memory puntero dirigido a la memoria
+* \param *R_activos puntero a los resgistros activos
+*/
 void POP(uint32_t *Registro,uint8_t *Memory,int *R_activos);
