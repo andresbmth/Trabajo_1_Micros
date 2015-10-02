@@ -12,7 +12,7 @@
 #define SP 13
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 60
+#define TAM_MEMORY 320
 
 void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas,uint8_t *Memory)
 {

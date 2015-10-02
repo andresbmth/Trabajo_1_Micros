@@ -6,7 +6,7 @@
 #define SP 13
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 60
+#define TAM_MEMORY 320
 
 int Bitcount(uint8_t *R_activos){
 	int i;

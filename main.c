@@ -12,7 +12,7 @@
 #define SP 13
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 60
+#define TAM_MEMORY 320
 
 int main()
 {
@@ -28,6 +28,9 @@ int main()
 	char op=1;
 	int v=500;
 	Registro[SP]=TAM_MEMORY;
+	for(i=0;i<TAM_MEMORY;i++){
+		Memory[i]=255;
+	}
 	
 	num_instructions = readFile("code2.txt", &read);
 	if(num_instructions==-1)
@@ -89,6 +92,9 @@ int main()
 			}
 			for(i=0;i<4;i++){
 				R_Banderas[i]=0;
+			}
+			for(i=0;i<TAM_MEMORY;i++){
+				Memory[i]=255;
 			}
 			v=500;
 			timeout(-1);

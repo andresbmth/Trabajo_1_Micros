@@ -11,7 +11,7 @@
 #define V 3
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 60
+#define TAM_MEMORY 320
 
 void mostrar_valores(uint32_t *Registro,char *R_Banderas){
 	int i;
@@ -36,23 +36,50 @@ void mostrar_valores(uint32_t *Registro,char *R_Banderas){
 void mostrar_memoria(uint8_t *Memory){
 	erase();
 	clear();
-	int i;
+	int i,j;
 	attron(COLOR_PAIR(1));
-	mvprintw(2,30,"RAM");
-	mvprintw(24,60,"Salir:");
+	mvprintw(1,35,"RAM");
+	mvprintw(24,35,"Salir:");
 	attroff(COLOR_PAIR(1));
 	attron(COLOR_PAIR(2));
-	mvprintw(24,67,"S");
-	for(i=0;i<TAM_MEMORY;i++){
-		if(i<20){
-			mvprintw(3+i,5,"%d",Memory[i]);
+	mvprintw(24,42,"S");
+	i=TAM_MEMORY-1;
+	j=0;
+	while(i>=0){
+		if(i>=240){
+			mvprintw(3+j,5,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
-		if((i>=20)&&(i<40)){
-			mvprintw(3+i-20,30,"%d",Memory[i]);
+		if((i<240)&&(i>=160)){
+			mvprintw(3+j-20,25,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
-		if(i>=40){
-			mvprintw(3+i-40,55,"%d",Memory[i]);
+		if((i<160)&&(i>=80)){
+			mvprintw(3+j-40,45,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
+		if(i<80){
+			mvprintw(3+j-60,65,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
+		}
+		i-=4;
+		j++;
 	}
-	attroff(COLOR_PAIR(2));   //imprime en pantalla la memoria que se realiza con los ciclos 
+	attroff(COLOR_PAIR(2));
+	attron(COLOR_PAIR(1));
+	i=1;
+	j=0;
+	while(i<TAM_MEMORY){
+		if(i<80){
+			mvprintw(3+j,0,"%.2X:",TAM_MEMORY-i);
+		}
+		if((i>=80)&&(i<160)){
+			mvprintw(3+j-20,20,"%.2X:",TAM_MEMORY-i);
+		}
+		if((i>=160)&&(i<240)){
+			mvprintw(3+j-40,40,"%.2X:",TAM_MEMORY-i);
+		}
+		if(i>=240){
+			mvprintw(3+j-60,60,"%.2X:",TAM_MEMORY-i);
+		}
+		i+=4;
+		j++;
+	}
+	attroff(COLOR_PAIR(1));
 }
