@@ -70,3 +70,26 @@ void POP(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos){
 	Registro[SP]=Registro[SP]+4*Bitcount(R_activos);
 	Registro[PC]++;
 }
+
+void LDRH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=(Rn+Rm)<<1;
+	Registro[PC]++;
+}
+
+void LDRSB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=(uint32_t)(Rn+Rm);
+	Registro[PC]++;
+}
+
+void LDRSH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=(uint32_t)(Rn+Rm);
+	Registro[PC]++;
+}
+
+void STR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	Memory[Rn+Rm]=(uint8_t)(*Rt);
+	Memory[Rn+Rm+1]=(uint8_t)(*Rt>>8);
+	Memory[Rn+Rm+2]=(uint8_t)(*Rt>>16);
+	Memory[Rn+Rm+3]=(uint8_t)(*Rt>>24);
+	Registro[PC]++;
+}

@@ -19,3 +19,8 @@ void PUSH(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos);
 * \param *R_activos puntero a los resgistros activos
 */
 void POP(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos);
+
+void LDRH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDRSB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDRSH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void STR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
