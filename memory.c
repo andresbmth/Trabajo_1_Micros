@@ -104,3 +104,11 @@ void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t R
     Memory[Rn+Rm+1]=(uint16_t)(*Rt>>16);
 	Registro[PC]++;
 }
+void LDR(unit32_t *Registro,unit32_t *Rt,uint32_t *Rn,unit32_t *Rm){
+	*Rt=Rn+Rm;
+	Registro[PC]++;
+}
+void LDRB(unit32_t *registros,unit32_t ){
+	Memory[Rn+Rm]=(uint32_t)(*Rt);
+	Registro[PC]++;
+}
