@@ -93,3 +93,14 @@ void STR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm
 	Memory[Rn+Rm+3]=(uint8_t)(*Rt>>24);
 	Registro[PC]++;
 }
+
+void STRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	Memory[Rn+Rm]=(uint8_t)(*Rt);
+	Registro[PC]++;
+}
+
+void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	Memory[Rn+Rm]=(uint16_t)(*Rt);
+    Memory[Rn+Rm+1]=(uint16_t)(*Rt>>16);
+	Registro[PC]++;
+}
