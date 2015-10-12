@@ -71,12 +71,12 @@ void POP(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos){
 	Registro[PC]++;
 }
 
-void LDR(unit32_t *Registro,unit32_t *Rt,uint32_t Rn,unit32_t Rm){
+void LDR(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
 	*Rt=Rn+Rm;
 	Registro[PC]++;
 }
 
-void LDRB(uint8_t *Memory,unit32_t *registros,unit32_t,uint32_t Rn,uint32_t Rm){
+void LDRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
 	Memory[Rn+Rm]=(uint32_t)(*Rt);
 	Registro[PC]++;
 }
@@ -110,7 +110,7 @@ void STRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t R
 }
 
 void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	Memory[Rn+Rm]=(uint16_t)(*Rt);
-    Memory[Rn+Rm+1]=(uint16_t)(*Rt>>16);
+	Memory[Rn+Rm]=(uint8_t)(*Rt);
+    Memory[Rn+Rm+1]=(uint8_t)(*Rt>>8);
 	Registro[PC]++;
 }
