@@ -189,6 +189,58 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	if(strcmp(instruction.mnemonic,"B")==0){
 		B(Registro,instruction.op1_value);
 	}
+	if(strcmp(instruction.mnemonic,"LDR")==0){
+		if(instruction.op3_type=='#'){
+		LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
+		}else{
+		LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}
+	if(strcmp(instruction.mnemonic,"LDRB")==0){
+		if(instruction.op3_type=='#'){
+		LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],instruction.op3_value); 
+		}else{
+		LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}
+	if(strcmp(instruction.mnemonic,"LDRH")==0){
+		if(instruction.op3_type=='#'){
+		LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
+		}else{
+		LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}
+	if(strcmp(instruction.mnemonic,"LDRSB")==0){
+		LDRSB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+	}
+	if(strcmp(instruction.mnemonic,"LDRSH")==0){
+		LDRSH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+	}
+	
+	if(strcmp(instruction.mnemonic,"STR")==0){
+		if(instruction.op3_type=='#'){
+		STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
+		}else{
+		STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}
+	
+	if(strcmp(instruction.mnemonic,"STRB")==0){
+		if(instruction.op3_type=='#'){
+		STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)); 
+		}else{
+		STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}
+	
+	if(strcmp(instruction.mnemonic,"STRH")==0){
+		if(instruction.op3_type=='#'){
+		STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
+		}else{
+		STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}
+	
 	refresh();
 	attroff(COLOR_PAIR(2));
 	mostrar_valores(Registro,R_Banderas);	
