@@ -3,6 +3,11 @@
 #include <stdint.h>
 #include "memory.h"
 
+#define N 0
+#define Z 1
+#define C 2
+#define V 3
+
 #define SP 13
 #define LR 14
 #define PC 15
@@ -113,4 +118,72 @@ void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t R
 	Memory[Rn+Rm]=(uint8_t)(*Rt);
     Memory[Rn+Rm+1]=(uint8_t)(*Rt>>8);
 	Registro[PC]++;
+}
+
+void PUSH_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
+	int i;
+	uint32_t address;
+	address=Registro[SP]-4*16;
+	for(i=0;i<16;i++){
+		if(i!=SP){
+			Memory[address]=(uint8_t)Registro[i];
+			Memory[address+1]=(uint8_t)(Registro[i]>>8);
+			Memory[address+2]=(uint8_t)(Registro[i]>>16);
+			Memory[address+3]=(uint8_t)(Registro[i]>>24);
+			address+=4;
+		}
+	}
+	
+	Memory[address]=(uint8_t)R_Banderas[N];
+	Memory[address+1]=(uint8_t)R_Banderas[Z];
+	Memory[address+2]=(uint8_t)R_Banderas[C];
+	Memory[address+3]=(uint8_t)R_Banderas[V];
+	
+	Registro[SP]=Registro[SP]-4*16;
+}
+
+void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
+	int i;
+	uint32_t address;
+	address=Registro[SP];
+	for(i=0;i<16;i++){
+		if(i!=SP){
+			Registro[i]=0;
+			Registro[i]=Registro[i]|(((uint32_t)Memory[address]));
+			Registro[i]=Registro[i]|(((uint32_t)Memory[address+1])<<8);
+			Registro[i]=Registro[i]|(((uint32_t)Memory[address+2])<<16);
+			Registro[i]=Registro[i]|(((uint32_t)Memory[address+3])<<24);
+			address+=4;
+		}
+	}
+	
+	R_Banderas[N]=(char)Memory[address];
+	R_Banderas[Z]=(char)Memory[address+1];
+	R_Banderas[C]=(char)Memory[address+2];
+	R_Banderas[V]=(char)Memory[address+3];
+	
+	Registro[SP]=Registro[SP]+4*16;
+}
+
+void NVIC(int *I,uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
+	int i;
+	PUSH_INTER(Memory,Registro,R_Banderas);
+	for(i=0;i<5;i++){
+		if((I[i]=1)&&(i==0)){
+			// Se ejecuta la instruccion correspondiente
+		}
+		if((I[i]=1)&&(i==1)){
+			// Se ejecuta la instruccion correspondiente
+		}
+		if((I[i]=1)&&(i==2)){
+			// Se ejecuta la instruccion correspondiente
+		}
+		if((I[i]=1)&&(i==3)){
+			// Se ejecuta la instruccion correspondiente
+		}
+		if((I[i]=1)&&(i==4)){
+			// Se ejecuta la instruccion correspondiente
+		}
+	}
+	POP_INTER(Memory,Registro,R_Banderas);
 }

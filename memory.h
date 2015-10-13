@@ -95,3 +95,6 @@ void STRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t R
 */
 void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
+void PUSH_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+void NVIC(int *I,uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
