@@ -17,6 +17,7 @@
 
 void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas,uint8_t *Memory)
 {
+	uint8_t data;
 	if(strcmp(instruction.mnemonic,"ADC")==0||strcmp(instruction.mnemonic,"ADCS")==0){
 			ADC(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value],R_Banderas);
 	}
@@ -190,16 +191,17 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	if(strcmp(instruction.mnemonic,"B")==0){
 		B(Registro,instruction.op1_value);
 	}
+	data=(uint8_t)(Registro[instruction.op1_value]);
 	if(strcmp(instruction.mnemonic,"LDR")==0){
 		if(instruction.op3_type=='#'){
-			if((Registro[instruction.op2_value]+(instruction.op3_value)<<2)>=0x40000000){
-				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)<<2),&Registro[instruction.op1_value],Read);
+			if((Registro[instruction.op2_value]+(instruction.op3_value<<2))>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<2)),&data,Read);
 			}else{
 				LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
 			}
 		}else{
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
-				IOAccess((uint8_t)(Registro[instruction.op2_value]+instruction.op3_value),&Registro[instruction.op1_value],Read);
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
 			}else{
 				LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]); 
 			}
@@ -207,14 +209,14 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	}	
 	if(strcmp(instruction.mnemonic,"LDRB")==0){
 		if(instruction.op3_type=='#'){
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&Registro[instruction.op1_value],Read);
+			if((Registro[instruction.op2_value]+instruction.op3_value)>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&data,Read);
 			}else{	
 				LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],instruction.op3_value); 
 			}
 		}else{
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&Registro[instruction.op1_value],Read);
+			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
 			}else{
 				LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 			}
@@ -222,76 +224,74 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	}
 	if(strcmp(instruction.mnemonic,"LDRH")==0){
 		if(instruction.op3_type=='#'){
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<1)>=0x40000000){
-				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<1),&Registro[instruction.op1_value],Read);
+			if((Registro[instruction.op2_value]+(instruction.op3_value<<1))>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<1)),&data,Read);
 			}else{
 				LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
 			}
 		}else{
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Read);
+			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
 			}else{
 				LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 			}
 		}
 	}		
 	if(strcmp(instruction.mnemonic,"LDRSB")==0){
-		if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Read);
+		if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+			IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
 		}else{
 			LDRSB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 		}
 	}		
 	if(strcmp(instruction.mnemonic,"LDRSH")==0){
-		if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Read);
+		if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+			IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
 		}else{
 			LDRSH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 		}
 	}
 	if(strcmp(instruction.mnemonic,"STR")==0){
 		if(instruction.op3_type=='#'){
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<2)>=0x40000000){
-				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<2),&Registro[instruction.op1_value],Write);
+			if((Registro[instruction.op2_value]+(instruction.op3_value<<2))>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<2)),&data,Write);
 			}
 			else{
 			STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
 			}
-		}
-	else{
-		if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
 		}else{
-		STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Write);
+			}else{
+				STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			}
 		}
-	}
-}	
-	
+	}	
 	if(strcmp(instruction.mnemonic,"STRB")==0){
 		if(instruction.op3_type=='#'){
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
+			if((Registro[instruction.op2_value]+(instruction.op3_value))>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&data,Write);
 			}else{
 				STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)); 
 			}
 		}else{
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
-			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
+			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Write);
 			}else{
-		STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+				STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			}
 		}
-	}
-	
+	}	
 	if(strcmp(instruction.mnemonic,"STRH")==0){
 		if(instruction.op3_type=='#'){
-			if((Registro[instrucción.op2_value]+(Registro[instrucción.op3_value])<<1)>=0x40000000){
-				IOAcces((uint8_t) (Registro[instrucción.op2_value]+(Registro[instrucción.op3_value])<<1),&Registro[instruction.op1_value],Write);
+			if((Registro[instruction.op2_value]+(instruction.op3_value<<1))>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<1)),&data,Write);
 			}else{
 				STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
 			}
 		}else{
-			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value]>=0x40000000){
-				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
+			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Write);
 			}else{	
 				STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 			}
@@ -316,7 +316,7 @@ instruction_t getInstruction(char* instStr)
 	int num=0;
 	
 	strcpy(split, instStr);
-	/* Obtiene el mnemonico de la instrucción */	
+	/* Obtiene el mnemonico de la instruction */	
 	split = strtok(split, " ,");
 	strcpy(instruction.mnemonic, split);
 	
@@ -387,7 +387,7 @@ int readFile(char* filename, ins_t* instructions)
 	
 	lines = countLines(fp);	/* Cantidad de líneas*/
 	
-	/* Asignación dinámica de memoria para cada instrucción */
+	/* Asignación dinámica de memoria para cada instruction */
 	instructions->array = (char**)malloc(lines*sizeof(char*));
 	while ( fgets(buffer, 50, fp) != NULL && line<lines ){
         instructions->array[line] = (char*)malloc((strlen(buffer)+1)*sizeof(char));

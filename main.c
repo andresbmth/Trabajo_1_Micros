@@ -61,7 +61,8 @@ int main()
 		mvprintw(21,63,"Reiniciar:");
 		mvprintw(23,1,"Disminuir velocidad:");
 		mvprintw(23,30,"Aumentar velocidad:");
-		mvprintw(23,65,"RAM:");
+		mvprintw(23,58,"RAM:");
+		mvprintw(23,68,"E/S:");
 		attroff(COLOR_PAIR(1));	
 		attron(COLOR_PAIR(2));
 		mvprintw(21,16,"P");
@@ -70,7 +71,8 @@ int main()
 		mvprintw(21,74,"R");
 		mvprintw(23,22,"V");
 		mvprintw(23,50,"B");
-		mvprintw(23,70,"M");
+		mvprintw(23,63,"M");
+		mvprintw(23,73,"N");
 		attroff(COLOR_PAIR(2));
 		mostrar_valores(Registro,R_Banderas);
 		mvprintw(6,50,"%s",instructions[PCAux]);
@@ -117,7 +119,7 @@ int main()
 				ch='m';
 			}
 		}
-		while(ch=='l'){
+		while(ch=='n'){
 			erase();
 			showPorts();
 			ch=getch();
@@ -125,7 +127,7 @@ int main()
 				erase();
 				break;
 			}else{
-				ch='l';
+				ch='n';
 			}
 		}
 		for(i=0;i<16;i++){
