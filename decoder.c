@@ -8,6 +8,7 @@
 #include "branch.h"
 #include "decoder.h"
 #include "memory.h"
+#include "io.h"
 
 #define SP 13
 #define LR 14
@@ -191,55 +192,111 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	}
 	if(strcmp(instruction.mnemonic,"LDR")==0){
 		if(instruction.op3_type=='#'){
-		LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
+			if((Registro[instruction.op2_value]+(instruction.op3_value)<<2)>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)<<2),&Registro[instruction.op1_value],Read);
+			}else{
+				LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
+			}
 		}else{
-		LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+instruction.op3_value),&Registro[instruction.op1_value],Read);
+			}else{
+				LDR(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]); 
+			}
 		}
-	}
+	}	
 	if(strcmp(instruction.mnemonic,"LDRB")==0){
 		if(instruction.op3_type=='#'){
-		LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],instruction.op3_value); 
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&Registro[instruction.op1_value],Read);
+			}else{	
+				LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],instruction.op3_value); 
+			}
 		}else{
-		LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&Registro[instruction.op1_value],Read);
+			}else{
+				LDRB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			}
 		}
 	}
 	if(strcmp(instruction.mnemonic,"LDRH")==0){
 		if(instruction.op3_type=='#'){
-		LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<1)>=0x40000000){
+				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<1),&Registro[instruction.op1_value],Read);
+			}else{
+				LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
+			}
 		}else{
-		LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Read);
+			}else{
+				LDRH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			}
+		}
+	}		
+	if(strcmp(instruction.mnemonic,"LDRSB")==0){
+		if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Read);
+		}else{
+			LDRSB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+		}
+	}		
+	if(strcmp(instruction.mnemonic,"LDRSH")==0){
+		if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Read);
+		}else{
+			LDRSH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 		}
 	}
-	if(strcmp(instruction.mnemonic,"LDRSB")==0){
-		LDRSB(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
-	}
-	if(strcmp(instruction.mnemonic,"LDRSH")==0){
-		LDRSH(Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
-	}
-	
 	if(strcmp(instruction.mnemonic,"STR")==0){
 		if(instruction.op3_type=='#'){
-		STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<2)>=0x40000000){
+				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]<<2),&Registro[instruction.op1_value],Write);
+			}
+			else{
+			STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
+			}
+		}
+	else{
+		if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
 		}else{
 		STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 		}
 	}
+}	
 	
 	if(strcmp(instruction.mnemonic,"STRB")==0){
 		if(instruction.op3_type=='#'){
-		STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)); 
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
+			}else{
+				STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)); 
+			}
 		}else{
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value])>=0x40000000){
+			IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
+			}else{
 		STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 		}
 	}
 	
 	if(strcmp(instruction.mnemonic,"STRH")==0){
 		if(instruction.op3_type=='#'){
-		STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
+			if((Registro[instrucción.op2_value]+(Registro[instrucción.op3_value])<<1)>=0x40000000){
+				IOAcces((uint8_t) (Registro[instrucción.op2_value]+(Registro[instrucción.op3_value])<<1),&Registro[instruction.op1_value],Write);
+			}else{
+				STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
+			}
 		}else{
-		STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			if((Registro[instrucción.op2_value]+Registro[instrucción.op3_value]>=0x40000000){
+				IOAcces((uint8_t) (Registro[instrucción.op2_value]+Registro[instrucción.op3_value]),&Registro[instruction.op1_value],Write);
+			}else{	
+				STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
+			}
 		}
-	}
+	}	
 	
 	refresh();
 	attroff(COLOR_PAIR(2));
