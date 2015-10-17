@@ -2,7 +2,6 @@
 
 port_t PORTA;
 port_t PORTB;
-uint8_t irq[16];
 
 void initIO(void)
 {

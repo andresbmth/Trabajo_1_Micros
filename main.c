@@ -28,8 +28,7 @@ int main()
 	char ch=0;
 	char op=1;
 	int v=500;
-	int Irq[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	int inter=0;
+	uint16_t Ins_Decode=0;
 	Registro[SP]=TAM_MEMORY;
 	for(i=0;i<TAM_MEMORY;i++){
 		Memory[i]=255;
@@ -51,10 +50,14 @@ int main()
     start_color();	/* Permite manejar colores */
 	init_pair(1, COLOR_YELLOW, COLOR_BLACK);	/* Pair 1 -> Texto verde fondo Negro */
     init_pair(2,COLOR_WHITE,COLOR_BLACK);
+	initIO();	// Inicializa los puertos de E/S
 	do{
+		init_pair(1, COLOR_YELLOW, COLOR_BLACK);
+		init_pair(2,COLOR_WHITE,COLOR_BLACK);
 		attron(COLOR_PAIR(1));
 		mvprintw(2,30,"EMULADOR CORTEX-M0");
 		mvprintw(5,50,"Instruccion actual");
+		mvprintw(8,50,"Codificacion hexadesimal");
 		mvprintw(21,3,"Paso a paso:");
 		mvprintw(21,25,"Automatico:");
 		mvprintw(21,47,"Salir:");
@@ -73,6 +76,7 @@ int main()
 		mvprintw(23,50,"B");
 		mvprintw(23,63,"M");
 		mvprintw(23,73,"N");
+		mvprintw(9,50,"%.4X",Ins_Decode);
 		attroff(COLOR_PAIR(2));
 		mostrar_valores(Registro,R_Banderas);
 		mvprintw(6,50,"%s",instructions[PCAux]);
@@ -104,7 +108,7 @@ int main()
 			v=500;
 			timeout(-1);
 			op=1;
-			inter=0;
+			Ins_Decode=0;
 			erase();
 			Registro[SP]=TAM_MEMORY;
 			PCAux=Registro[PC];
@@ -130,36 +134,29 @@ int main()
 				ch='n';
 			}
 		}
-		for(i=0;i<16;i++){
-			if(Irq[i]==1){
-				inter++;
-			}
-		}
-		if(inter!=0){
-			NVIC(Irq,Memory,Registro,R_Banderas);
-		}else{
-			if((ch=='p')||(op==0)){
-				attron(COLOR_PAIR(1));
-				mvprintw(2,30,"EMULADOR CORTEX-M0");
-				mvprintw(5,50,"Instruccion actual");
-				mvprintw(21,3,"Paso a paso:");
-				mvprintw(21,25,"Automatico:");
-				mvprintw(21,47,"Salir:");
-				mvprintw(21,63,"Reiniciar:");
-				attroff(COLOR_PAIR(1));	
-				attron(COLOR_PAIR(2));
-				mvprintw(21,16,"P");
-				mvprintw(21,37,"A");
-				mvprintw(21,54,"E");
-				mvprintw(21,74,"R");
-				attroff(COLOR_PAIR(2));
-				erase();
-				instruction = getInstruction(instructions[Registro[PC]]);
-				mvprintw(6,50,"%s",instructions[Registro[PC]]);
-				PCAux=Registro[PC];
-				decodeInstruction(instruction,Registro,R_Banderas,Memory);
-			}
-		}
+		if((ch=='p')||(op==0)){
+			attron(COLOR_PAIR(1));
+			mvprintw(2,30,"EMULADOR CORTEX-M0");
+			mvprintw(5,50,"Instruccion actual");
+			mvprintw(21,3,"Paso a paso:");
+			mvprintw(21,25,"Automatico:");
+			mvprintw(21,47,"Salir:");
+			mvprintw(21,63,"Reiniciar:");
+			attroff(COLOR_PAIR(1));	
+			attron(COLOR_PAIR(2));
+			mvprintw(21,16,"P");
+			mvprintw(21,37,"A");
+			mvprintw(21,54,"E");
+			mvprintw(21,74,"R");
+			attroff(COLOR_PAIR(2));
+			erase();
+			NVIC(irq,Memory,Registro,R_Banderas);
+			instruction = getInstruction(instructions[Registro[PC]]);
+			mvprintw(6,50,"%s",instructions[Registro[PC]]);
+			PCAux=Registro[PC];
+			decodeInstruction(instruction,Registro,R_Banderas,Memory,&Ins_Decode);
+			mvprintw(9,50,"%.4X",Ins_Decode);
+		}		
 	}while(ch!='e');
 	for(i=0; i<num_instructions; i++){
 		free(read.array[i]);

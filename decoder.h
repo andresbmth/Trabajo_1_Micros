@@ -31,8 +31,9 @@ typedef struct
 * \param instruction instrucción a decodificar y ejecutar
 * \param *Registro Puntero al registro
 * \param *R_Banderas Puntero a las banderas
+* \param *Ins_Decode Variable para la codificacion de la instruccion en representacion a 16 bits
 */
-void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas,uint8_t *Memory);
+void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Banderas,uint8_t *Memory,uint16_t *Ins_Decode);
 
 /** \fn instruction_t getInstruction(char* instStr)
 * \brief Obtiene la instrucción separada por partes

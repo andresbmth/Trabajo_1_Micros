@@ -165,15 +165,15 @@ void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	Registro[SP]=Registro[SP]+4*8;
 }
 
-void NVIC(int *Irq,uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
+void NVIC(uint8_t *irq,uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	int i;
 	static int flag=0;
 	if(flag==0){
 		for(i=0;i<16;i++){
-			if(Irq[i]==1){
+			if(irq[i]==1){
 				PUSH_INTER(Memory,Registro,R_Banderas);
 				Registro[PC]=i+1;
-				Irq[i]=0;
+				irq[i]=0;
 				flag=1;
 				Registro[LR]=0xFFFFFFFF;
 			}

@@ -19,6 +19,8 @@
 #define REDBLACK	20	/*Text Red Background Black*/
 #define WHITEBLACK	30  /*Text White Background White*/
 
+uint8_t irq[16];
+
 typedef struct{
 	uint8_t DDR;
 	uint8_t PORT;
