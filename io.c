@@ -78,7 +78,7 @@ void IOAccess(uint8_t address, uint8_t* data, uint8_t r_w)
 				break;
 			case 1:				
 				PORTA.PORT = *data;
-				PORTA.Pins = (PORTA.PORT&(~PORTA.DDR))|(PORTA.PORT&PORTA.DDR);
+				PORTA.Pins = (PORTA.Pins&(~PORTA.DDR))|(PORTA.PORT&PORTA.DDR);
 				break;
 			case 3:				
 				PORTA.Interrupts = *data&(~PORTA.DDR);
@@ -88,7 +88,7 @@ void IOAccess(uint8_t address, uint8_t* data, uint8_t r_w)
 				break;
 			case 11:
 				PORTB.PORT = *data;
-				PORTB.Pins = (PORTB.PORT&(~PORTB.DDR))|(PORTB.PORT&PORTB.DDR);
+				PORTB.Pins = (PORTB.Pins&(~PORTB.DDR))|(PORTB.PORT&PORTB.DDR);
 				break;
 			case 13:				
 				PORTB.Interrupts = *data&(~PORTB.DDR);
