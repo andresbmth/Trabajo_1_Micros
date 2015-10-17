@@ -8,6 +8,7 @@
 #include "branch.h"
 #include "decoder.h"
 #include "memory.h"
+#include "io.h"
 
 #define SP 13
 #define LR 14
@@ -27,14 +28,14 @@ int main()
 	char ch=0;
 	char op=1;
 	int v=500;
-	int I[5]={0,0,0,0,0};
+	int Irq[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	int inter=0;
 	Registro[SP]=TAM_MEMORY;
 	for(i=0;i<TAM_MEMORY;i++){
 		Memory[i]=255;
 	}
 	
-	num_instructions = readFile("code2.txt", &read);
+	num_instructions = readFile("code.txt", &read);
 	if(num_instructions==-1)
 		return 0;
 
@@ -58,7 +59,7 @@ int main()
 		mvprintw(21,25,"Automatico:");
 		mvprintw(21,47,"Salir:");
 		mvprintw(21,63,"Reiniciar:");
-		mvprintw(23,0,"Disminuir velocidad:");
+		mvprintw(23,1,"Disminuir velocidad:");
 		mvprintw(23,30,"Aumentar velocidad:");
 		mvprintw(23,65,"RAM:");
 		attroff(COLOR_PAIR(1));	
@@ -67,7 +68,7 @@ int main()
 		mvprintw(21,37,"A");
 		mvprintw(21,54,"E");
 		mvprintw(21,74,"R");
-		mvprintw(23,21,"V");
+		mvprintw(23,22,"V");
 		mvprintw(23,50,"B");
 		mvprintw(23,70,"M");
 		attroff(COLOR_PAIR(2));
@@ -116,13 +117,24 @@ int main()
 				ch='m';
 			}
 		}
-		for(i=0;i<5;i++){
-			if(I[i]==1){
+		while(ch=='l'){
+			erase();
+			showPorts();
+			ch=getch();
+			if(ch=='s'){
+				erase();
+				break;
+			}else{
+				ch='l';
+			}
+		}
+		for(i=0;i<16;i++){
+			if(Irq[i]==1){
 				inter++;
 			}
 		}
 		if(inter!=0){
-			NVIC(I,Memory,Registro,R_Banderas);
+			NVIC(Irq,Memory,Registro,R_Banderas);
 		}else{
 			if((ch=='p')||(op==0)){
 				attron(COLOR_PAIR(1));

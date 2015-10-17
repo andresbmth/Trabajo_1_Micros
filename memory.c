@@ -123,9 +123,9 @@ void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t R
 void PUSH_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	int i;
 	uint32_t address;
-	address=Registro[SP]-4*16;
+	address=Registro[SP]-4*8;
 	for(i=0;i<16;i++){
-		if(i!=SP){
+		if((i!=SP)&&((i<4)||(i>11))){
 			Memory[address]=(uint8_t)Registro[i];
 			Memory[address+1]=(uint8_t)(Registro[i]>>8);
 			Memory[address+2]=(uint8_t)(Registro[i]>>16);
@@ -139,7 +139,7 @@ void PUSH_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	Memory[address+2]=(uint8_t)R_Banderas[C];
 	Memory[address+3]=(uint8_t)R_Banderas[V];
 	
-	Registro[SP]=Registro[SP]-4*16;
+	Registro[SP]=Registro[SP]-4*8;
 }
 
 void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
@@ -147,7 +147,7 @@ void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	uint32_t address;
 	address=Registro[SP];
 	for(i=0;i<16;i++){
-		if(i!=SP){
+		if((i!=SP)&&((i<4)||(i>11))){
 			Registro[i]=0;
 			Registro[i]=Registro[i]|(((uint32_t)Memory[address]));
 			Registro[i]=Registro[i]|(((uint32_t)Memory[address+1])<<8);
@@ -162,28 +162,26 @@ void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	R_Banderas[C]=(char)Memory[address+2];
 	R_Banderas[V]=(char)Memory[address+3];
 	
-	Registro[SP]=Registro[SP]+4*16;
+	Registro[SP]=Registro[SP]+4*8;
 }
 
-void NVIC(int *I,uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
+void NVIC(int *Irq,uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 	int i;
-	PUSH_INTER(Memory,Registro,R_Banderas);
-	for(i=0;i<5;i++){
-		if((I[i]=1)&&(i==0)){
-			// Se ejecuta la instruccion correspondiente
+	static int flag=0;
+	if(flag==0){
+		for(i=0;i<16;i++){
+			if(Irq[i]==1){
+				PUSH_INTER(Memory,Registro,R_Banderas);
+				Registro[PC]=i+1;
+				Irq[i]=0;
+				flag=1;
+				Registro[LR]=0xFFFFFFFF;
+			}
 		}
-		if((I[i]=1)&&(i==1)){
-			// Se ejecuta la instruccion correspondiente
-		}
-		if((I[i]=1)&&(i==2)){
-			// Se ejecuta la instruccion correspondiente
-		}
-		if((I[i]=1)&&(i==3)){
-			// Se ejecuta la instruccion correspondiente
-		}
-		if((I[i]=1)&&(i==4)){
-			// Se ejecuta la instruccion correspondiente
-		}
+	}else{
+		if(Registro[PC]==Registro[LR]){
+		POP_INTER(Memory,Registro,R_Banderas);
+		flag=0;
 	}
-	POP_INTER(Memory,Registro,R_Banderas);
+	}
 }
