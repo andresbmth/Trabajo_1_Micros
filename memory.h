@@ -95,6 +95,27 @@ void STRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t R
 */
 void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
+/** \fn void PUSH_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+* \brief <center><b>Funcion PUSH_INTER</b></center>
+* \param *Memory Puntero dirigido a la memoria
+* \param *Registro Puntero al registro
+* \param *R_Banderas Puntero al registro de las banderas 
+*/
 void PUSH_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+
+/** \fn void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+* \brief <center><b>Funcion POP_INTER</b></center>
+* \param *Memory Puntero dirigido a la memoria
+* \param *Registro Puntero al registro
+* \param *R_Banderas Puntero al registro de las banderas 
+*/
 void POP_INTER(uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+
+/** \fn void NVIC(uint8_t *irq,uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
+* \brief <center><b>Funcion NVIC</b></center>
+* \param *irq Puntero dirigido a el arreglo que indica las instruciones
+* \param *Memory Puntero dirigido a la memoria
+* \param *Registro Puntero al registro
+* \param *R_Banderas Puntero al registro de las banderas 
+*/
 void NVIC(uint8_t *irq,uint8_t *Memory,uint32_t *Registro,char *R_Banderas);
