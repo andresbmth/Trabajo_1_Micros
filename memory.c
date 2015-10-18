@@ -11,7 +11,7 @@
 #define SP 13
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 320
+#define TAM_MEMORY 256
 
 int Bitcount(uint8_t *R_activos){
 	int i;
@@ -76,47 +76,52 @@ void POP(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos){
 	Registro[PC]++;
 }
 
-void LDR(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	*Rt=Rn+Rm;
+void LDR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=((uint32_t)Memory[(uint8_t)(Rn+Rm)]);
+	*Rt=*Rt|(((uint32_t)Memory[(uint8_t)(Rn+Rm)+1])<<8);
+	*Rt=*Rt|(((uint32_t)Memory[(uint8_t)(Rn+Rm)+2])<<16);
+	*Rt=*Rt|(((uint32_t)Memory[(uint8_t)(Rn+Rm)+3])<<24);
 	Registro[PC]++;
 }
 
-void LDRB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	*Rt=(Rn+Rm);
+void LDRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=((uint32_t)Memory[(uint8_t)(Rn+Rm)]);
 	Registro[PC]++;
 }
 
-void LDRH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	*Rt=(Rn+Rm);
+void LDRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=(((uint32_t)Memory[(uint8_t)(Rn+Rm)]));
+	*Rt=*Rt|(((uint32_t)Memory[(uint8_t)(Rn+Rm)+1])<<8);
 	Registro[PC]++;
 }
 
-void LDRSB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	*Rt=(uint32_t)(Rn+Rm);
+void LDRSB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=((uint32_t)Memory[(uint8_t)(Rn+Rm)]);
 	Registro[PC]++;
 }
 
-void LDRSH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	*Rt=(uint32_t)(Rn+Rm);
+void LDRSH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
+	*Rt=((uint32_t)Memory[(uint8_t)(Rn+Rm)]);
+	*Rt=*Rt|(((uint32_t)Memory[(uint8_t)(Rn+Rm)+1])<<8);
 	Registro[PC]++;
 }
 
 void STR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	Memory[Rn+Rm]=(uint8_t)(*Rt);
-	Memory[Rn+Rm+1]=(uint8_t)(*Rt>>8);
-	Memory[Rn+Rm+2]=(uint8_t)(*Rt>>16);
-	Memory[Rn+Rm+3]=(uint8_t)(*Rt>>24);
+	Memory[(uint8_t)(Rn+Rm)]=(uint8_t)(*Rt);
+	Memory[(uint8_t)(Rn+Rm)+1]=(uint8_t)(*Rt>>8);
+	Memory[(uint8_t)(Rn+Rm)+2]=(uint8_t)(*Rt>>16);
+	Memory[(uint8_t)(Rn+Rm)+3]=(uint8_t)(*Rt>>24);
 	Registro[PC]++;
 }
 
 void STRB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	Memory[Rn+Rm]=(uint8_t)(*Rt);
+	Memory[(uint8_t)(Rn+Rm)]=(uint8_t)(*Rt);
 	Registro[PC]++;
 }
 
 void STRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm){
-	Memory[Rn+Rm]=(uint8_t)(*Rt);
-    Memory[Rn+Rm+1]=(uint8_t)(*Rt>>8);
+	Memory[(uint8_t)(Rn+Rm)]=(uint8_t)(*Rt);
+    Memory[(uint8_t)(Rn+Rm)+1]=(uint8_t)(*Rt>>8);
 	Registro[PC]++;
 }
 

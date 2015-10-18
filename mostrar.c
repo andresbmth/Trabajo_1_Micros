@@ -11,7 +11,7 @@
 #define V 3
 #define LR 14
 #define PC 15
-#define TAM_MEMORY 320
+#define TAM_MEMORY 256
 
 void mostrar_valores(uint32_t *Registro,char *R_Banderas){
 	int i;
@@ -39,24 +39,24 @@ void mostrar_memoria(uint8_t *Memory){
 	int i,j;
 	attron(COLOR_PAIR(1));
 	mvprintw(1,35,"RAM");
-	mvprintw(24,35,"Salir:");
+	mvprintw(20,35,"Salir:");
 	attroff(COLOR_PAIR(1));
 	attron(COLOR_PAIR(2));
-	mvprintw(24,42,"S");
+	mvprintw(20,42,"S");
 	i=TAM_MEMORY-1;
 	j=0;
 	while(i>=0){
-		if(i>=240){
+		if(i>=192){
 			mvprintw(3+j,5,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
-		if((i<240)&&(i>=160)){
-			mvprintw(3+j-20,25,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
+		if((i<192)&&(i>=128)){
+			mvprintw(3+j-16,25,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
-		if((i<160)&&(i>=80)){
-			mvprintw(3+j-40,45,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
+		if((i<128)&&(i>=64)){
+			mvprintw(3+j-32,45,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
-		if(i<80){
-			mvprintw(3+j-60,65,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
+		if(i<64){
+			mvprintw(3+j-48,65,"%.2X %.2X %.2X %.2X",Memory[i],Memory[i-1],Memory[i-2],Memory[i-3]);
 		}
 		i-=4;
 		j++;
@@ -66,17 +66,17 @@ void mostrar_memoria(uint8_t *Memory){
 	i=1;
 	j=0;
 	while(i<TAM_MEMORY){
-		if(i<80){
-			mvprintw(3+j,0,"%.2X:",TAM_MEMORY-i);
+		if(i<64){
+			mvprintw(3+j,1,"%.2X:",TAM_MEMORY-i);
 		}
-		if((i>=80)&&(i<160)){
-			mvprintw(3+j-20,20,"%.2X:",TAM_MEMORY-i);
+		if((i>=64)&&(i<128)){
+			mvprintw(3+j-16,21,"%.2X:",TAM_MEMORY-i);
 		}
-		if((i>=160)&&(i<240)){
-			mvprintw(3+j-40,40,"%.2X:",TAM_MEMORY-i);
+		if((i>=128)&&(i<192)){
+			mvprintw(3+j-32,41,"%.2X:",TAM_MEMORY-i);
 		}
-		if(i>=240){
-			mvprintw(3+j-60,60,"%.2X:",TAM_MEMORY-i);
+		if(i>=192){
+			mvprintw(3+j-48,61,"%.2X:",TAM_MEMORY-i);
 		}
 		i+=4;
 		j++;

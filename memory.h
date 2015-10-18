@@ -27,7 +27,7 @@ void POP(uint32_t *Registro,uint8_t *Memory,uint8_t *R_activos);
 * \param Rn Valor primer del registro
 * \param Rm Valor del segundo registro, puede ser un inmediato convertido en 32 bits
 */
-void LDR(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
 /** \fn void LDRB(uint32_t *registros,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \brief <center><b>Funcion LDRB</b></center>
@@ -36,7 +36,7 @@ void LDR(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \param Rn Valor del primer registro
 * \param Rm Valor del segundo registro, puede ser un inmediato convertido en 32 bits
 */
-void LDRB(uint32_t *registros,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDRB(uint8_t *Memory,uint32_t *registros,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
 /** \fn void LDRH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \brief <center><b>Funcion LDRH</b></center>
@@ -45,7 +45,7 @@ void LDRB(uint32_t *registros,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \param Rn Valor del primer registro
 * \param Rm Valor del segundo registro, puede ser un inmediato convertido en 32 bits
 */
-void LDRH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDRH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
 /** \fn void LDRSB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \brief <center><b>Funcion LDRSB</b></center>
@@ -54,7 +54,7 @@ void LDRH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \param Rn Valor del primer registro
 * \param Rm Valor del segundo registro
 */
-void LDRSB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDRSB(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
 /** \fn void LDRSH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \brief <center><b>Funcion LDRSH</b></center>
@@ -63,7 +63,7 @@ void LDRSB(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \param Rn Valor del primer registro
 * \param Rm Valor del segundo registro
 */
-void LDRSH(uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
+void LDRSH(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 
 /** \fn void STR(uint8_t *Memory,uint32_t *Registro,uint32_t *Rt,uint32_t Rn,uint32_t Rm);
 * \brief <center><b>Funcion STR</b></center>
