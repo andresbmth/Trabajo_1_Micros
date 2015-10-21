@@ -22,10 +22,10 @@ void mostrar_valores(uint32_t *Registro,char *R_Banderas){
 	attroff(COLOR_PAIR(1));
 	attron(COLOR_PAIR(2));
     for(i=0;i<13;i++){ // se realiza el ciclo para mostrar los registros que van de 1 a 12.
-        mvprintw(6+i,1,"R%d: %u",i,Registro[i]);
+        mvprintw(6+i,1,"R%X: %X",i,Registro[i]);
     }
 	mvprintw(6,25,"LR: %d",2*Registro[LR]);
-	mvprintw(7,25,"PC: %u",2*Registro[PC]);	
+	mvprintw(7,25,"PC: %d",2*Registro[PC]);	
 	mvprintw(12,25,"N: %d",R_Banderas[N]);	
 	mvprintw(13,25,"Z: %d",R_Banderas[Z]);
 	mvprintw(14,25,"C: %d",R_Banderas[C]);

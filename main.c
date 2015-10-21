@@ -35,7 +35,7 @@ int main()
 		Memory[i]=255;
 	}
 	
-	num_instructions = readFile("code.txt", &read);
+	num_instructions = readFile("code6.txt", &read);
 	if(num_instructions==-1)
 		return 0;
 

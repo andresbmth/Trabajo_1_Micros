@@ -1,0 +1,10 @@
+LDR r0,=0x00000000
+LDR r1,=0x20000000
+LDR r2,=100
+LDRB r3,[r0]
+ADDS r0,r0,#1
+STRB r3,[r1]
+ADDS r1,r1,#1
+SUBS r2,r2,#1
+BNE #-5
+B #0

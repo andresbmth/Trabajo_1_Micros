@@ -310,7 +310,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	}
 	data=(uint8_t)(Registro[instruction.op1_value]);
 	if(strcmp(instruction.mnemonic,"LDR")==0){
-		if(instruction.op3_type=='#'){
+		if(((instruction.op3_type=='#')||(instruction.op3_type=='N'))&&(instruction.op2_type!='=')){
 			if((Registro[instruction.op2_value]+(instruction.op3_value<<2))>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<2)),&data,Read);
 				Registro[PC]++;
@@ -321,7 +321,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 				*Ins_Decode=(*Ins_Decode)|(((uint16_t)(instruction.op2_value))<<3);
 				*Ins_Decode=(*Ins_Decode)|((uint16_t)(instruction.op1_value));
 			}
-		}else{
+		}else if(instruction.op3_type=='R'){
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
 				Registro[PC]++;
@@ -331,12 +331,16 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 				*Ins_Decode=(*Ins_Decode)|(((uint16_t)(instruction.op1_value))<<8);
 				*Ins_Decode=(*Ins_Decode)|((uint16_t)(instruction.op3_value));
 			}
+		}else if((instruction.op2_type=='=')&&(instruction.op3_type=='N')){
+			Registro[instruction.op1_value]=instruction.op2_value;
+			Registro[PC]++;			
 		}
 	}	
 	if(strcmp(instruction.mnemonic,"LDRB")==0){
 		if(instruction.op3_type=='#'){
 			if((Registro[instruction.op2_value]+instruction.op3_value)>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&data,Read);
+				Registro[PC]++;
 			}else{	
 				LDRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],instruction.op3_value); 
 				*Ins_Decode=30720;
@@ -347,6 +351,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		}else{
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
+				Registro[PC]++;
 			}else{
 				LDRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 				*Ins_Decode=23552;
@@ -360,6 +365,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		if(instruction.op3_type=='#'){
 			if((Registro[instruction.op2_value]+(instruction.op3_value<<1))>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<1)),&data,Read);
+				Registro[PC]++;
 			}else{
 				LDRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
 				*Ins_Decode=34816;
@@ -370,6 +376,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		}else{
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
+				Registro[PC]++;
 			}else{
 				LDRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 				*Ins_Decode=23040;
@@ -382,6 +389,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	if(strcmp(instruction.mnemonic,"LDRSB")==0){
 		if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 			IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
+			Registro[PC]++;
 		}else{
 			LDRSB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 			*Ins_Decode=22016;
@@ -393,6 +401,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 	if(strcmp(instruction.mnemonic,"LDRSH")==0){
 		if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 			IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Read);
+			Registro[PC]++;
 		}else{
 			LDRSH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 			*Ins_Decode=24064;
@@ -405,6 +414,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		if(instruction.op3_type=='#'){
 			if((Registro[instruction.op2_value]+(instruction.op3_value<<2))>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<2)),&data,Write);
+				Registro[PC]++;
 			}
 			else{
 				STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<2); 
@@ -416,6 +426,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		}else{
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Write);
+				Registro[PC]++;
 			}else{
 				STR(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 				*Ins_Decode=36864;
@@ -428,6 +439,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		if(instruction.op3_type=='#'){
 			if((Registro[instruction.op2_value]+(instruction.op3_value))>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value)),&data,Write);
+				Registro[PC]++;
 			}else{
 				STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)); 
 				*Ins_Decode=28672;
@@ -438,6 +450,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		}else{
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Write);
+				Registro[PC]++;
 			}else{
 				STRB(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 				*Ins_Decode=21504;
@@ -451,6 +464,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		if(instruction.op3_type=='#'){
 			if((Registro[instruction.op2_value]+(instruction.op3_value<<1))>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+(instruction.op3_value<<1)),&data,Write);
+				Registro[PC]++;
 			}else{
 				STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],(instruction.op3_value)<<1); 
 				*Ins_Decode=32768;
@@ -461,6 +475,7 @@ void decodeInstruction(instruction_t instruction,uint32_t *Registro,char *R_Band
 		}else{
 			if((Registro[instruction.op2_value]+Registro[instruction.op3_value])>=0x40000000){
 				IOAccess((uint8_t)(Registro[instruction.op2_value]+Registro[instruction.op3_value]),&data,Write);
+				Registro[PC]++;
 			}else{	
 				STRH(Memory,Registro,&Registro[instruction.op1_value],Registro[instruction.op2_value],Registro[instruction.op3_value]);
 				*Ins_Decode=20992;
@@ -517,13 +532,16 @@ instruction_t getInstruction(char* instStr)
 				break;
 			
 			case 2:
+				if(split[0] == '['){
+					split++;
+				}
 				instruction.op2_type  = split[0];
 				instruction.op2_value = (uint32_t)strtoll(split+1, NULL, 0);
 				break;
 			
 			case 3:
 				instruction.op3_type  = split[0];
-				instruction.op3_value = (uint32_t)strtoll(split+1, NULL, 0);			
+				instruction.op3_value = (uint32_t)strtoll(split+1, NULL, 0);
 				break;
 		}
 		if(split != NULL){

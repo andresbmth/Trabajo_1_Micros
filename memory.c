@@ -185,8 +185,8 @@ void NVIC(uint8_t *irq,uint8_t *Memory,uint32_t *Registro,char *R_Banderas){
 		}
 	}else{
 		if(Registro[PC]==Registro[LR]){
-		POP_INTER(Memory,Registro,R_Banderas);
-		flag=0;
-	}
+			POP_INTER(Memory,Registro,R_Banderas);
+			flag=0;
+		}
 	}
 }
