@@ -136,16 +136,16 @@ int main()
 			}
 		}
 		if(ch=='1'){		//prueba 1 para modulos E/S para los puertos A
-			data=0x3C;
+			/*data=0x3C;
 			IOAccess(0, &data, Write);
 			data=0x0F;
 			IOAccess(1, &data, Write);	
 			data=0xF0;
 			IOAccess(2, &data, Write);			
-			changePinPortA(0,1);
-			changePinPortA(2,1);
+			*/changePinPortA(0,1);
+			/*changePinPortA(2,1);
 			changePinPortA(4,1);
-			changePinPortA(6,1);
+			changePinPortA(6,1);*/
 		}
 		if(ch=='2'){		//Prueba 2 para modulos E/S para los puertos B
 			data=0xAA;
